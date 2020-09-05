@@ -1,0 +1,42 @@
+<runStats miner="Activity Pair Left-Handed Estimator" machineName="SEF-1953019678">
+        <!-- Manual edit by AB. Earth movers threw ArrayIndexOutOfBoundsException when calculated on HPC -->
+   <inputLogFileName>BPIC2013_incidents.xes</inputLogFileName>
+   <outputModelFileName>var\osmodel_aplh-split_BPIC2013_incidents.xml</outputModelFileName>
+   <runDate>2020-08-28 22:12:53.962 AEST</runDate>
+   <taskRunStats class="java.util.LinkedList">
+      <taskStats taskName="calculate Naive SPN entity count" runState="SUCCESS">
+         <duration>0</duration>
+         <start>1598616774883</start>
+         <measureStats measure="NORMALIZED_PETRI_NET_EDGE_SIMPLICITY">
+            <number class="java.lang.Double">0.9996337722979263</number>
+         </measureStats>
+         <measureStats measure="MODEL_ENTITY_COUNT">
+            <number class="java.lang.Integer">20</number>
+         </measureStats>
+         <measureStats measure="MODEL_EDGE_COUNT">
+            <number class="java.lang.Integer">24</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="calculate Entropy Precision and Recall" runState="SUCCESS">
+         <duration>5890</duration>
+         <start>1598616774883</start>
+         <measureStats measure="ENTROPY_RECALL">
+            <number class="java.lang.Double">0.8157521972726631</number>
+         </measureStats>
+         <measureStats measure="ENTROPY_PRECISION">
+            <number class="java.lang.Double">0.10092207524011218</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="spmlogparser" runState="RUNNING">
+         <duration>0</duration>
+         <start>1598616773962</start>
+         <measureStats measure="LOG_TRACE_COUNT">
+            <number class="java.lang.Integer">7554</number>
+         </measureStats>
+         <measureStats measure="LOG_EVENT_COUNT">
+            <number class="java.lang.Integer">65533</number>
+         </measureStats>
+      </taskStats>
+   </taskRunStats>
+   <runState>FAILED</runState>
+</runStats>

@@ -1,0 +1,30 @@
+<runStats miner="Fodina Miner" machineName="SEF-1953019678" runnerVersion="0.19">
+   <inputLogFileName>BPIC2018_control.xes</inputLogFileName>
+   <outputModelFileName>var2\omodel_fodina_BPIC2018_control.pnml</outputModelFileName>
+   <runDate>2020-09-04 18:16:26.868 AEST</runDate>
+   <taskRunStats class="java.util.LinkedList">
+      <taskStats taskName="spmlogparser" runState="SUCCESS">
+         <duration>3391</duration>
+         <start>1599207386868</start>
+         <errorMessage></errorMessage>
+         <measureStats measure="LOG_EVENT_COUNT">
+            <number class="java.lang.Integer">161296</number>
+         </measureStats>
+         <measureStats measure="LOG_TRACE_COUNT">
+            <number class="java.lang.Integer">43808</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="miner" runState="SUCCESS">
+         <duration>140</duration>
+         <start>1599207390259</start>
+         <errorMessage></errorMessage>
+      </taskStats>
+      <taskStats taskName="visualize" runState="SUCCESS">
+         <duration>0</duration>
+         <start>1599207390399</start>
+         <errorMessage></errorMessage>
+      </taskStats>
+   </taskRunStats>
+   <errorMessage></errorMessage>
+   <runState>SUCCESS</runState>
+</runStats>

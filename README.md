@@ -17,6 +17,14 @@ To build:
 To build a zip for distributing, eg to run from command line or on Unix:
 `ant makezip`
 
+## Running
+
+The test scaffold entry point is ModelRunner.java.
+
+The reporting entry point is SPNDiscoverReporter.java.
+
+
 ## Results
 
 Result files from experiments performed on this framework are in `results`.
+

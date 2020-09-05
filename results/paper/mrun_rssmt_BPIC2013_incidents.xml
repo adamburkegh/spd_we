@@ -1,0 +1,54 @@
+<runStats miner="Rogge-Solti StochasticMinerPlugin (Tracing)" machineName="SEF-1953019678">
+	<!-- AB manual edit to mark FAILED as E-M failed -->
+   <inputLogFileName>BPIC2013_incidents.xes</inputLogFileName>
+   <outputModelFileName>var\omodel_rssmt_BPIC2013_incidents.xml</outputModelFileName>
+   <runDate>2020-08-19 23:50:18.607 AEST</runDate>
+   <taskRunStats class="java.util.LinkedList">
+      <taskStats taskName="spmlogparser" runState="SUCCESS">
+         <duration>1343</duration>
+         <start>1597845018607</start>
+         <measureStats measure="LOG_TRACE_COUNT">
+            <number class="java.lang.Integer">7554</number>
+         </measureStats>
+         <measureStats measure="LOG_EVENT_COUNT">
+            <number class="java.lang.Integer">65533</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="miner" runState="SUCCESS">
+         <duration>48097</duration>
+         <start>1597845019950</start>
+      </taskStats>
+      <taskStats taskName="calculate Naive SPN entity count" runState="SUCCESS">
+         <duration>0</duration>
+         <start>1597845068235</start>
+         <measureStats measure="MODEL_EDGE_COUNT">
+            <number class="java.lang.Integer">46</number>
+         </measureStats>
+         <measureStats measure="MODEL_ENTITY_COUNT">
+            <number class="java.lang.Integer">37</number>
+         </measureStats>
+         <measureStats measure="NORMALIZED_PETRI_NET_EDGE_SIMPLICITY">
+            <number class="java.lang.Double">0.9992980635710252</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="calculate Entropy Precision and Recall" runState="SUCCESS">
+         <duration>4140</duration>
+         <start>1597845068766</start>
+         <measureStats measure="ENTROPY_PRECISION">
+            <number class="java.lang.Double">0.5445167496094125</number>
+         </measureStats>
+         <measureStats measure="ENTROPY_RECALL">
+            <number class="java.lang.Double">0.2901544337469962</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="calculate Earth Movers Similarity" runState="FAILED">
+         <duration>1285186</duration>
+         <start>1597845072906</start>
+      </taskStats>
+      <taskStats taskName="visualize" runState="SUCCESS">
+         <duration>0</duration>
+         <start>1597846358092</start>
+      </taskStats>
+   </taskRunStats>
+   <runState>FAILED</runState>
+</runStats>

@@ -1,0 +1,42 @@
+<runStats miner="Mean Scaled Activity Pair Estimator" machineName="SEF-1953019678">
+	<!-- AB Manual edit: EarthMovers java.lang.NegativeArraySizeException -->
+   <inputLogFileName>sepsis.xes</inputLogFileName>
+   <outputModelFileName>var\osmodel_msaprh-split_sepsis.xml</outputModelFileName>
+   <runDate>2020-08-29 13:44:53.774 AEST</runDate>
+   <taskRunStats class="java.util.LinkedList">
+      <taskStats taskName="calculate Naive SPN entity count" runState="SUCCESS">
+         <duration>0</duration>
+         <start>1598672693899</start>
+         <measureStats measure="MODEL_ENTITY_COUNT">
+            <number class="java.lang.Integer">52</number>
+         </measureStats>
+         <measureStats measure="NORMALIZED_PETRI_NET_EDGE_SIMPLICITY">
+            <number class="java.lang.Double">0.9956618903641383</number>
+         </measureStats>
+         <measureStats measure="MODEL_EDGE_COUNT">
+            <number class="java.lang.Integer">66</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="calculate Entropy Precision and Recall" runState="SUCCESS">
+         <duration>1437</duration>
+         <start>1598672693899</start>
+         <measureStats measure="ENTROPY_PRECISION">
+            <number class="java.lang.Double">0.04721128939679433</number>
+         </measureStats>
+         <measureStats measure="ENTROPY_RECALL">
+            <number class="java.lang.Double">0.2023799441243126</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="spmlogparser" runState="FAILED">
+         <duration>1273667</duration>
+         <start>1598672693774</start>
+         <measureStats measure="LOG_EVENT_COUNT">
+            <number class="java.lang.Integer">15214</number>
+         </measureStats>
+         <measureStats measure="LOG_TRACE_COUNT">
+            <number class="java.lang.Integer">1050</number>
+         </measureStats>
+      </taskStats>
+   </taskRunStats>
+   <runState>FAILED</runState>
+</runStats>

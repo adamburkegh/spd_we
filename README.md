@@ -12,8 +12,11 @@ Requirements:
  + R (for the R scripts used in reporting only)
 
 To build:
-ant 
+`ant`
 
 To build a zip for distributing, eg to run from command line or on Unix:
-ant makezip
+`ant makezip`
 
+## Results
+
+Result files from experiments performed on this framework are in `results`.

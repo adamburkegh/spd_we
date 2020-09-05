@@ -1,0 +1,4 @@
+
+date
+
+qsub spm.sh

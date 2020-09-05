@@ -1,0 +1,24 @@
+<ivy-module version="2.0">
+    <info organisation="prom" module="SPNDiscoverAB" revision="latest">
+    	<description>
+    		Pre-alpha local experimentation for SPN discovery evaluation and new approaches
+    	</description>
+    </info>
+    <dependencies>
+        <dependency org="prom" name="StochasticPetriNets" rev="latest" changing="false" transitive="true" />
+        <!-- Implicit unpackaged dependency for SPN: lpsolve 5.5. See ldlib directory --> 
+        <dependency org="prom" name="EarthMoversStochasticConformanceChecking" rev="latest" changing="false" transitive="true" />
+        <dependency org="prom" name="StochasticAwareConformanceChecking" rev="latest" changing="false" transitive="true" />
+        <dependency org="prom" name="AlphaMiner" rev="latest" changing="false" transitive="true" />
+        <dependency org="prom" name="InductiveMiner" rev="latest" changing="false" transitive="true" />
+        <dependency org="prom" name="InductiveVisualMiner" rev="latest" changing="false" transitive="true" />
+        <!-- Fodina: unpackaged dependency, see ivysettings and ldlib directory -->
+        <dependency org="fodina" name="fodina"      rev="2019-06-17" changing="false" transitive="true" />
+        <dependency org="fodina" name="fodina-libs" rev="2019-06-17" changing="false" transitive="true" />
+        <dependency org="jgoodies" name="jgoodies-common" rev="1.3.1" changing="false" transitive="true" />
+        <dependency org="jgoodies" name="jgoodies-forms" rev="1.5.1" changing="false" transitive="true" />
+        <!-- End Fodina -->
+        <!-- Splitminer unpackaged dependency invoked OUT OF PROCESS, see ivysettings and ldlib directory -->
+        <dependency org="org.simpleframework" name="simple-xml" rev="2.7.1" changing="false" transitive="true" />
+     </dependencies>
+</ivy-module>

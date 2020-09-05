@@ -1,6 +1,6 @@
 # spd\_we
 
-This project shows a technique for discovering Stochastic Petri Nets from event logs using process mining techniques. It combines a number of established process mining discovery algorithms with weight estimators which capture a stochastic perspective.
+This project shows a technique for discovering Stochastic Petri Nets from event logs using process mining. It combines a number of established process mining discovery algorithms with weight estimators which capture a stochastic perspective.
 
 The estimation framework and evaluation test scaffold is described in "Burke, A, Leemans, S.J.J and Wynn, M. T. - Stochastic Process Discovery By Weight Estimation" (forthcoming).
 

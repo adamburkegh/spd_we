@@ -1,0 +1,225 @@
+<project name="spndiscover" default="Compile Sources" basedir="."  xmlns:ivy="antlib:org.apache.ivy.ant">
+		<!-- set global properties for this build -->
+		<property environment="env" />
+		<property name="src" location="src" />
+        <property name="src.tests" location="tests/src-test" />
+		<property name="build" location="bindist" />
+        <property name="config" location="config" />
+		<property name="doc" location="doc" />
+		<property name="dist" location="dist" />
+        <property name="lib" location="lib" />
+		<property name="ldlib" location="ldlib" />
+        <property name="scripts" location="scripts" />
+	    <property name="reports.tests" location="reports" />
+		<property name="release" location="latestrelease" />
+	    <property name="major_minor" value="0.20" />
+		<property name="version" value="${major_minor}" />
+		<property name="project" value="spndiscover" />
+
+		<!-- Set the os to win32, win64, lin32, lin64, mac, or all -->
+		<property name="os" value="all" />
+		
+		<property name="ivy.lib.dir" value="ivy" />
+    	<!-- property name="ivy.cache.dir" value="/var/lib/hudson/.ivy2/cache/${env.EXECUTOR_NUMBER}"  -->
+
+		<property name="author" value="Adam Burke" />
+		<property name="organization" value="QUT, Australia" />
+		<property name="description" value="Compare stochastic discovery techniques" />
+		<property name="license" value="GPL" />
+		
+		<property name="java.source.version" value="8" />
+		<property name="java.target.version" value="${java.source.version}" />
+		
+		<property name="main.class" value="au.edu.qut.pm.spn_discover.ModelRunner" />
+
+
+        <path id="classpath">
+ 			<fileset dir=".">
+ 				<include name="ivy/**/*.jar" />
+ 			</fileset>
+        </path>
+	
+	   <pathconvert property="jarclasspath" pathsep=" " refid="classpath">
+	        <mapper>
+	            <chainedmapper>
+	                <flattenmapper />
+	            </chainedmapper>
+	        </mapper>
+	    </pathconvert>
+
+        <!-- Compilation macro
+          This Macro compiles the sources is one ${src}-... folder.
+          The sources are compiled into the ${build} folder.
+          -->
+	
+		<macrodef name="compile">
+			<sequential>
+				<!-- Compile the java code from ${src}-@{module} into ${build} -->
+				<javac srcdir="${src}" classpathref="classpath"  
+					destdir="${build}" nowarn="false" verbose="yes" 
+					debug="false" debuglevel="lines,vars,source" deprecation="yes" 
+					source="${java.source.version}" target="${java.target.version}">
+					<!-- Check for unsafe operations -->
+					<compilerarg value="-Xlint:unchecked" />
+				</javac>
+				<!-- Tests -->
+                <javac srcdir="${src.tests}" classpathref="classpath"  
+                    destdir="${build}" nowarn="false" verbose="yes" 
+                    debug="false" debuglevel="lines,vars,source" deprecation="yes" 
+                    source="${java.source.version}" target="${java.target.version}">
+                    <!-- Check for unsafe operations -->
+                    <compilerarg value="-Xlint:unchecked" />
+                </javac>
+
+			</sequential>
+		</macrodef>
+
+		<!-- Jar macro
+
+		This Macro builds a jar file from compiled sources in the ${dist} folder.
+		-->
+		<macrodef name="makejar">
+			<sequential>
+				<!-- Create the distribution directory -->
+				<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+				<jar jarfile="${dist}/${project}-${DSTAMP}.jar">
+					<fileset dir="${build}">
+						<include name="**" />
+						<exclude name="test**" />
+					</fileset>
+					<fileset dir="${src}">
+						<include name="**" />
+						<exclude name="test**" />
+					</fileset>
+					<fileset dir="${doc}">
+						<include name="**" />
+						<exclude name="test**" />
+					</fileset>
+					<manifest>
+						<attribute name="Built-By" value="${user.name}" />
+						<attribute name="Specification-Title" value="${project}-@{module}" />
+						<attribute name="Specification-Version" value="${version}" />
+						<!-- attribute name="Specification-Vendor" value="www.processmining.org" / -->
+						<attribute name="Implementation-Title" value="${project}" />
+						<attribute name="Implementation-Version" value="${version} ${TODAY}" />
+						<!-- attribute name="Implementation-Vendor" value="www.processmining.org" / -->
+						<attribute name="Sealed" value="false" />
+						<attribute name="Main-Class" value="${main.class}" />
+						<attribute name="Class-Path" value="${jarclasspath}" />
+					</manifest>
+				</jar>
+				<copy file="${dist}/${project}-${DSTAMP}.jar" tofile="${dist}/${project}.jar" overwrite="true" />
+			</sequential>
+		</macrodef>
+	
+	<macrodef name="makezip">
+		<sequential>
+			<echo message="Version ${version} built on ${DSTAMP}" file="${dist}/buildid.txt" />
+		    <zip destfile="${dist}/${project}-${version}-${DSTAMP}.zip" > 
+				<zipfileset dir="${ldlib}" prefix="lib">
+					<include name="**" />
+				</zipfileset>				
+				<zipfileset dir="${ivy.lib.dir}" prefix="lib">
+					<include name="**" />
+				</zipfileset>
+				<zipfileset file="${dist}/${project}.jar" prefix="lib" />
+		    	<zipfileset file="${dist}/${buildid.txt}" prefix="config" />
+                <zipfileset dir="${config}" prefix="config">
+                    <include name="**" />
+                    <exclude name="**.swp" />
+                </zipfileset>
+				<fileset dir="${scripts}">
+					<include name="**" />
+					<exclude name="**.swp" />
+				</fileset>
+                <fileset file="${dist}/buildid.txt" />
+				<!-- Plus runner batch files and shell scripts -->
+			</zip>
+		</sequential>
+	</macrodef>
+
+	<target name="clean">
+		<echo message="[build] Cleaning binaries and distributions" />
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+	</target>
+	
+	<target name="resolve">
+		<ivy:retrieve type="jar,bundle" sync="true" />
+		<!--ivy:retrieve pattern="lib/[artifact]-[revision].[ext]" conf="lib" type="jar,bundle" sync="true" /-->
+	</target>
+
+	<target name="javadoc">
+		<echo message="[build] Creating javadoc" />
+		<javadoc packagenames="**" classpathref="classpath" useexternalfile="true" defaultexcludes="yes" destdir="${doc}" author="true" version="true" verbose="false" use="true" windowtitle="${project}">
+			<fileset dir=".">
+				<include name="src/**/*.java" />
+				<exclude name="src/test/**/*.java" />
+			</fileset>
+		</javadoc>
+	</target>
+	
+	<target name="compile">
+		<echo message="[build] Compiling the sources" />
+		<mkdir dir="${build}" />
+		<mkdir dir="${dist}" />
+		<compile />
+	</target>
+		
+	<target name="test" depends="compile">
+	  <junit printsummary="yes" haltonfailure="yes" showoutput="true">
+    	    <classpath>
+	          <fileset dir=".">
+	                <include name="ivy/**/*.jar" />
+	          </fileset>
+    	      <pathelement path="${build}" />
+    	    </classpath>
+	      <batchtest fork="no" todir="${reports.tests}">
+	        <fileset dir="${src.tests}">
+	          <include name="**/*Test.java"/>
+	        </fileset>
+	      </batchtest>
+	  </junit>
+	</target>
+	
+	<target name="makejar">
+		<echo message="[build] Creating jar" />
+		<tstamp />
+		<echo message="jarclasspath : ${jarclasspath} " />
+		<makejar />
+	</target>
+		
+	<target name="makezip" depends="makejar">
+		<echo message="[build] Creating zip" />
+		<tstamp />
+		<makezip />
+	</target>
+	
+	<!-- Target to use to prepare for a downstream build -->
+	<!-- The upstream changes will be copied in following this target -->
+	<target name="prepareDownstream" depends="clean,resolve" />
+	
+	<!-- Target to use to do the downstram build -->
+	<!-- The upstream changes will be copied in preceding this target -->
+	<target name="buildDownstream" depends="compile" />
+	
+	<!-- Targets for sake of backwards compatibility -->
+	
+	<!-- clean all binaries and distributions -->
+	<target name="Clean build and dist folders" description="clean up" id="1" depends="clean" />
+
+	<!-- create the project's javadoc from all existing sources. Note that only org.processmining.** is included -->
+	<target name="Create Javadoc" description="Generated javadoc" depends="javadoc" />
+
+	<target name="Compile Sources" depends="resolve,compile,test" />
+	
+	<target name="Create Zip" depends="clean,Compile Sources,makezip" />
+
+	<target name="ivy-depend" depends="resolve" >
+		<ivy:report graph="false"/>
+	</target>
+
+	
+	
+</project>
+		

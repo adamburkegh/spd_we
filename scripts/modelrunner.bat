@@ -5,7 +5,7 @@ set LDP=lib\lp_solve_5.5_java\lib\win64
 set JMEM=50g
 
 set JOPTS=-Xmx%JMEM% -Xms%JMEM%
-set CONFIG_PARAMS=-Djava.library.path=%LDP% -Dlog4j.configurationFile=config\static\log4j.xml
+set CONFIG_PARAMS=-Djava.library.path=%LDP% -Dlog4j.configurationFile=config\static\log4j2.xml
 
 if not exist var mkdir var
 

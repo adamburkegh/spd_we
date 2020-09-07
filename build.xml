@@ -1,4 +1,4 @@
-<project name="spndiscover" default="Compile Sources" basedir="."  xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="spndiscover" default="test" basedir="."  xmlns:ivy="antlib:org.apache.ivy.ant">
 		<!-- set global properties for this build -->
 		<property environment="env" />
 		<property name="src" location="src" />
@@ -12,7 +12,7 @@
         <property name="scripts" location="scripts" />
 	    <property name="reports.tests" location="reports" />
 		<property name="release" location="latestrelease" />
-	    <property name="major_minor" value="0.20" />
+	    <property name="major_minor" value="0.21" />
 		<property name="version" value="${major_minor}" />
 		<property name="project" value="spndiscover" />
 
@@ -20,7 +20,6 @@
 		<property name="os" value="all" />
 		
 		<property name="ivy.lib.dir" value="ivy" />
-    	<!-- property name="ivy.cache.dir" value="/var/lib/hudson/.ivy2/cache/${env.EXECUTOR_NUMBER}"  -->
 
 		<property name="author" value="Adam Burke" />
 		<property name="organization" value="QUT, Australia" />
@@ -70,7 +69,8 @@
                     <!-- Check for unsafe operations -->
                     <compilerarg value="-Xlint:unchecked" />
                 </javac>
-
+				<!-- Not strictly compilation but makes running simpler --> 
+                <mkdir dir="var" />
 			</sequential>
 		</macrodef>
 
@@ -142,6 +142,7 @@
 		<echo message="[build] Cleaning binaries and distributions" />
 		<delete dir="${build}" />
 		<delete dir="${dist}" />
+		<mkdir dir="var" />
 	</target>
 	
 	<target name="resolve">
@@ -182,7 +183,7 @@
 	  </junit>
 	</target>
 	
-	<target name="makejar">
+	<target name="makejar" depends="test,javadoc">
 		<echo message="[build] Creating jar" />
 		<tstamp />
 		<echo message="jarclasspath : ${jarclasspath} " />

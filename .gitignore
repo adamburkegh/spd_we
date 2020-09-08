@@ -1,0 +1,11 @@
+/bin/
+bindist/
+dist/
+doc/
+ivy/
+var/
+.settings/
+out.log
+.classpath
+.project
+

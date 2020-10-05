@@ -36,10 +36,6 @@ import au.edu.qut.prom.helpers.StochasticPetriNetUtils;
 		userAccessible = true, 
 		help = SPDWeightEstimatorPlugin.TEXT)
 public class SPDWeightEstimatorPlugin {
-
-	// TODO Allow user to select classifier, estimators
-	// TODO Expose other five estimators
-
 	
 	public static final String AFFILIATION = "Queensland University of Technology";
 	public static final String AUTHOR = "Adam Burke, Sander Leemans, Moe Thandar Wynn";
@@ -65,9 +61,9 @@ public class SPDWeightEstimatorPlugin {
 
 
 	@UITopiaVariant(affiliation = AFFILIATION, author = AUTHOR, email = EMAIL, 
-					uiLabel = "Mine Stochastic Petri net from Log with Estimator",
+					uiLabel = "Mine Stochastic Petri net from log with estimator",
 					uiHelp = "Use " + DEFAULT_ESTIMATOR + " and " + DEFAULT_MINER + ". " + TEXT)
-	@PluginVariant(variantLabel = "Mine Stochastic Petri net from Log with Estimator and " + DEFAULT_MINER + ")", 
+	@PluginVariant(variantLabel = "Mine Stochastic Petri net from log with " + DEFAULT_ESTIMATOR + " and " + DEFAULT_MINER + ")", 
 				   requiredParameterLabels = {0})
 	public static StochasticNet mineSPNFromLogWithDefaults(final PluginContext context, XLog log) {
 		try {

@@ -17,7 +17,6 @@ import au.edu.qut.prom.helpers.StochasticPetriNetUtils;
  * 
  * @author burkeat
  *
- * @param <E>
  */
 public class BillClintonEstimator extends AbstractFrequencyEstimator{
 

@@ -9,15 +9,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.deckfour.xes.model.XLog;
 import org.processmining.contexts.uitopia.UIPluginContext;
-import org.processmining.contexts.uitopia.annotations.UITopiaVariant;
-import org.processmining.framework.plugin.annotations.Plugin;
 import org.processmining.models.graphbased.directed.petrinet.Petrinet;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetEdge;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetNode;
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.Place;
 import org.processmining.models.graphbased.directed.petrinet.elements.Transition;
-import org.processmining.models.semantics.petrinet.Marking;
 import org.processmining.plugins.InductiveMiner.mining.MiningParameters;
 import org.processmining.plugins.InductiveMiner.mining.MiningParametersIMf;
 import org.processmining.plugins.InductiveMiner.plugins.IMPetriNet;
@@ -35,6 +32,8 @@ import org.processmining.plugins.stochasticpetrinet.enricher.PerformanceEnricher
  * 
  * Code and comments preserved as is from original (including the part where it claims not to be
  * implemented yet)
+ * 
+ * Commented out plugin declarations to avoid clashes with ProM GUI standard distribution
  * 
  * ---
  * Not yet implemented. Use implementation based on Process Trees for now.
@@ -66,14 +65,14 @@ public class StochasticMinerPlugin {
 //		return obj;
 //	}
 
-    @Plugin(name = "Mine stochastic Petri net from log",
-            parameterLabels = {"Log"},
-            returnLabels = {StochasticNet.PARAMETER_LABEL, "Marking"},
-            returnTypes = {StochasticNet.class, Marking.class},
-            userAccessible = true,
-            help = "Discovers a fitting Petri net with inductive miner and enriches it with stochastic information (time information required in the log).)."
-    )
-    @UITopiaVariant(affiliation = "Vienna University of Economics and Business", author = "A. Solti", email = "andreas.rogge-solti@wu.ac.at", uiLabel = UITopiaVariant.USEPLUGIN)
+//    @Plugin(name = "Mine stochastic Petri net from log",
+//            parameterLabels = {"Log"},
+//            returnLabels = {StochasticNet.PARAMETER_LABEL, "Marking"},
+//            returnTypes = {StochasticNet.class, Marking.class},
+//            userAccessible = true,
+//            help = "Discovers a fitting Petri net with inductive miner and enriches it with stochastic information (time information required in the log).)."
+//    )
+//    @UITopiaVariant(affiliation = "Vienna University of Economics and Business", author = "A. Solti", email = "andreas.rogge-solti@wu.ac.at", uiLabel = UITopiaVariant.USEPLUGIN)
     public static Object[] discoverStochNetMode(UIPluginContext context, XLog log) {
     	LOGGER.info("Discovering Stochastic Petri Net");
         Petrinet net = getFittingPetrinetWithChoicesModeledAsImmediateTransitions(context, log);

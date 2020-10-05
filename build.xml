@@ -12,7 +12,7 @@
         <property name="scripts" location="scripts" />
 	    <property name="reports.tests" location="reports" />
 		<property name="release" location="latestrelease" />
-	    <property name="major_minor" value="0.21" />
+	    <property name="major_minor" value="1.0" />
 		<property name="version" value="${major_minor}" />
 		<property name="project" value="spndiscover" />
 
@@ -82,7 +82,7 @@
 			<sequential>
 				<!-- Create the distribution directory -->
 				<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-				<jar jarfile="${dist}/${project}-${DSTAMP}.jar">
+				<jar jarfile="${dist}/${project}-${version}-${DSTAMP}.jar">
 					<fileset dir="${build}">
 						<include name="**" />
 						<exclude name="test**" />
@@ -108,7 +108,7 @@
 						<attribute name="Class-Path" value="${jarclasspath}" />
 					</manifest>
 				</jar>
-				<copy file="${dist}/${project}-${DSTAMP}.jar" tofile="${dist}/${project}.jar" overwrite="true" />
+				<copy file="${dist}/${project}-${version}-${DSTAMP}.jar" tofile="${dist}/${project}.jar" overwrite="true" />
 			</sequential>
 		</macrodef>
 	

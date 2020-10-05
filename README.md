@@ -35,7 +35,7 @@ Some scripts for running on Windows and Unix are in `scripts/`.
 Requirements: 
  + Java 8 (version 8 due to ProM required JDK version)
  + ant, ivy
- + lpsolve 5.5 (install in ldlib)
+ + lpsolve 5.5 (install in `ldlib`)
  + Some miners require extra jars, see note in `ldlib` folder. This is needed when doing integrated miner+estimator runs from the command line.
  + R (for the R scripts used in reporting only)
 

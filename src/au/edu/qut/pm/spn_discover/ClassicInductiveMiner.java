@@ -19,6 +19,8 @@ import org.processmining.plugins.inductiveminer2.mining.InductiveMiner;
 import org.processmining.plugins.inductiveminer2.plugins.InductiveMinerPlugin;
 import org.processmining.plugins.inductiveminer2.variants.MiningParametersIMInfrequent;
 
+import au.edu.qut.pm.stochastic.StochasticNetCloner;
+import au.edu.qut.pm.stochastic.StochasticNetDescriptor;
 import au.edu.qut.prom.helpers.StochasticPetriNetUtils;
 
 public class ClassicInductiveMiner implements StochasticNetLogMiner {

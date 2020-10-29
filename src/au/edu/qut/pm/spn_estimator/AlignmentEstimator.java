@@ -1,4 +1,4 @@
-package au.edu.qut.pm.spn_discover;
+package au.edu.qut.pm.spn_estimator;
 
 import java.util.Iterator;
 import java.util.Map;

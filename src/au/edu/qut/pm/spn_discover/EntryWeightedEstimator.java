@@ -12,6 +12,7 @@ import org.processmining.models.graphbased.directed.petrinet.elements.Place;
 import org.processmining.models.graphbased.directed.petrinet.elements.TimedTransition;
 import org.processmining.models.graphbased.directed.petrinet.elements.Transition;
 
+import au.edu.qut.pm.spn_estimator.WeightEstimator;
 import au.edu.qut.prom.helpers.StochasticPetriNetUtils;
 
 public class EntryWeightedEstimator implements WeightEstimator {

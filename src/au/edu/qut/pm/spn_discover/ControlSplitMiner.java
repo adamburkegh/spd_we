@@ -14,6 +14,7 @@ import org.processmining.plugins.pnml.simple.PNMLRoot;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
+import au.edu.qut.pm.stochastic.StochasticNetDescriptor;
 import au.edu.qut.prom.helpers.ConsoleUIPluginContext;
 import au.edu.qut.prom.helpers.HeadlessDefinitelyNotUIPluginContext;
 import au.edu.qut.prom.helpers.StochasticPetriNetUtils;

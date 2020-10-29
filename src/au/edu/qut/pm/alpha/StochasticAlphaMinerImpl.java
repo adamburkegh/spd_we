@@ -17,7 +17,7 @@ import org.processmining.models.graphbased.directed.petrinet.elements.Transition
 import org.processmining.models.graphbased.directed.petrinet.impl.StochasticNetImpl;
 import org.processmining.models.semantics.petrinet.Marking;
 
-import au.edu.qut.pm.spn_discover.WeightEstimator;
+import au.edu.qut.pm.spn_estimator.WeightEstimator;
 
 /**
  * Extension of AlphaMiner to natively calculate transition weights. Markings are not

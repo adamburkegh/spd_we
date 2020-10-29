@@ -11,6 +11,8 @@ import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.TimedTransition;
 import org.processmining.models.graphbased.directed.petrinet.elements.Transition;
 
+import au.edu.qut.pm.spn_estimator.WeightEstimator;
+
 /**
  * Only well-defined for free-choice nets.
  * 

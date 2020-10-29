@@ -5,6 +5,9 @@ import org.deckfour.xes.model.XLog;
 import org.processmining.acceptingpetrinet.models.AcceptingPetriNet;
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 
+import au.edu.qut.pm.spn_estimator.LogSourcedWeightEstimator;
+import au.edu.qut.pm.stochastic.StochasticNetDescriptor;
+
 public class EstimatorRun implements StochasticArtifactRun{
 
 	private LogSourcedWeightEstimator estimator;

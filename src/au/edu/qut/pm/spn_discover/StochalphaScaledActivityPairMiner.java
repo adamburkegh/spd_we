@@ -14,6 +14,7 @@ import org.processmining.models.semantics.petrinet.Marking;
 
 import au.edu.qut.pm.alpha.StochasticAlphaMiner;
 import au.edu.qut.pm.alpha.StochasticAlphaMinerFactory;
+import au.edu.qut.pm.stochastic.StochasticNetDescriptor;
 import au.edu.qut.xes.helpers.XESLogUtils;
 
 public class StochalphaScaledActivityPairMiner implements StochasticNetLogMiner {

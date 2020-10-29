@@ -1,4 +1,4 @@
-package org.processmining.plugins.sdpwe;
+package org.processmining.plugins.spdwe;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,13 +12,13 @@ import javax.swing.JPanel;
 import org.deckfour.xes.model.XLog;
 import org.processmining.plugins.InductiveMiner.ClassifierChooser;
 
-import au.edu.qut.pm.spn_discover.ActivityPairLHEstimator;
-import au.edu.qut.pm.spn_discover.ActivityPairRHEstimator;
-import au.edu.qut.pm.spn_discover.AlignmentEstimator;
-import au.edu.qut.pm.spn_discover.BillClintonEstimator;
-import au.edu.qut.pm.spn_discover.FrequencyEstimator;
-import au.edu.qut.pm.spn_discover.LogSourcedWeightEstimator;
-import au.edu.qut.pm.spn_discover.MeanScaledActivityPairRHEstimator;
+import au.edu.qut.pm.spn_estimator.ActivityPairLHEstimator;
+import au.edu.qut.pm.spn_estimator.ActivityPairRHEstimator;
+import au.edu.qut.pm.spn_estimator.AlignmentEstimator;
+import au.edu.qut.pm.spn_estimator.BillClintonEstimator;
+import au.edu.qut.pm.spn_estimator.FrequencyEstimator;
+import au.edu.qut.pm.spn_estimator.LogSourcedWeightEstimator;
+import au.edu.qut.pm.spn_estimator.MeanScaledActivityPairRHEstimator;
 import au.edu.qut.xes.helpers.DelimitedTraceToXESConverter;
 
 /**

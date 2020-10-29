@@ -13,6 +13,7 @@ import org.processmining.models.graphbased.directed.petrinet.elements.TimedTrans
 import org.processmining.models.graphbased.directed.petrinet.impl.StochasticNetImpl;
 import org.processmining.models.semantics.petrinet.Marking;
 
+import au.edu.qut.pm.stochastic.StochasticNetDescriptor;
 import au.edu.qut.xes.helpers.XESLogUtils;
 
 public class FlowerMiner implements StochasticNetLogMiner {

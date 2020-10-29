@@ -4,8 +4,8 @@ import org.processmining.alphaminer.abstractions.AlphaClassicAbstraction;
 import org.processmining.alphaminer.abstractions.AlphaRobustAbstraction;
 import org.processmining.framework.plugin.PluginContext;
 
-import au.edu.qut.pm.spn_discover.BillClintonWeightEstimator;
-import au.edu.qut.pm.spn_discover.WeightEstimator;
+import au.edu.qut.pm.spn_estimator.BillClintonWeightEstimator;
+import au.edu.qut.pm.spn_estimator.WeightEstimator;
 
 public class StochasticAlphaMinerBillClintonImpl<E> extends StochasticAlphaMinerImpl<E>  {
 

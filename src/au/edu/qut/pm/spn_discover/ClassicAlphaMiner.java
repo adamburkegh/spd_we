@@ -19,6 +19,8 @@ import org.processmining.models.graphbased.directed.petrinet.Petrinet;
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 import org.processmining.models.semantics.petrinet.Marking;
 
+import au.edu.qut.pm.stochastic.StochasticNetCloner;
+import au.edu.qut.pm.stochastic.StochasticNetDescriptor;
 import au.edu.qut.xes.helpers.XESLogUtils;
 
 public class ClassicAlphaMiner implements StochasticNetLogMiner {

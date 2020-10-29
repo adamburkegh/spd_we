@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 
+import au.edu.qut.pm.stochastic.StochasticNetDescriptor;
 import au.edu.qut.prom.helpers.ConsoleUIPluginContext;
 import au.edu.qut.prom.helpers.HeadlessUIPluginContext;
 import au.edu.qut.prom.helpers.PetriNetFragmentParser;

@@ -32,6 +32,8 @@ import org.processmining.xeslite.plugin.OpenLogFileLiteImplPlugin;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
+import au.edu.qut.pm.spn_estimator.LogSourcedWeightEstimator;
+import au.edu.qut.pm.stochastic.StochasticNetDescriptor;
 import au.edu.qut.prom.helpers.ConsoleUIPluginContext;
 import au.edu.qut.prom.helpers.HeadlessDefinitelyNotUIPluginContext;
 import au.edu.qut.prom.helpers.HeadlessUIPluginContext;
@@ -156,11 +158,11 @@ public class ModelRunner {
 				if (estimatorName.contains(".")) {
 					estimatorClass = Class.forName(estimatorName);
 				}else {
-					estimatorClass = Class.forName("au.edu.qut.pm.spn_discover." + estimatorName);
+					estimatorClass = Class.forName("au.edu.qut.pm.spn_estimator." + estimatorName);
 				}
 				estimators.add((LogSourcedWeightEstimator) estimatorClass.getConstructor().newInstance());
 			}catch (Exception e) {
-				LOGGER.error("Couldn't load miner class {} ",estimatorName);
+				LOGGER.error("Couldn't load estimator class {} ",estimatorName);
 			}
 		}
 	}

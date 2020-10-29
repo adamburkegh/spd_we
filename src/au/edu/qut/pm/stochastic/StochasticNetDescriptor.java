@@ -1,4 +1,4 @@
-package au.edu.qut.pm.spn_discover;
+package au.edu.qut.pm.stochastic;
 
 import java.util.HashSet;
 import java.util.Set;

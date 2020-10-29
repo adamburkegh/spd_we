@@ -1,4 +1,4 @@
-package au.edu.qut.pm.spn_discover;
+package au.edu.qut.pm.spn_estimator;
 
 import static au.edu.qut.prom.helpers.StochasticPetriNetUtils.findAllSuccessors;
 

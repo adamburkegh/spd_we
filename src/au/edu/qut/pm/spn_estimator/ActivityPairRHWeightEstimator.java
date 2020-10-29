@@ -1,6 +1,6 @@
-package au.edu.qut.pm.spn_discover;
+package au.edu.qut.pm.spn_estimator;
 
-import static au.edu.qut.prom.helpers.StochasticPetriNetUtils.findAllPredecessors;
+import static au.edu.qut.prom.helpers.StochasticPetriNetUtils.findAllSuccessors;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,14 +12,14 @@ import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.TimedTransition;
 import org.processmining.models.graphbased.directed.petrinet.elements.Transition;
 
-public class ActivityPairLHWeightEstimator<E> implements WeightEstimator {
+public class ActivityPairRHWeightEstimator<E> implements WeightEstimator{
 
 	private MatrixAbstraction<E> followsFrequency;
 	private ColumnAbstraction<E> startFrequency;
 	private ColumnAbstraction<E> endFrequency;
 	private Map<Transition, E> transition2class = new HashMap<Transition, E>();
 	
-	public ActivityPairLHWeightEstimator(MatrixAbstraction<E> followsFrequency,
+	public ActivityPairRHWeightEstimator(MatrixAbstraction<E> followsFrequency,
 			ColumnAbstraction<E> startFrequency,
 			ColumnAbstraction<E> endFrequency,
 			Map<Transition, E> transition2class) {
@@ -38,15 +38,16 @@ public class ActivityPairLHWeightEstimator<E> implements WeightEstimator {
 		for (Transition tran: net.getTransitions()) {
 			E tranEC = transition2class.get(tran);
 			TimedTransition transition = (TimedTransition)tran;
-			Collection<Transition> predecessors = findAllPredecessors(transition);
-			double predecessorWeight = 0;
-			for (Transition pred: predecessors) {
-				predecessorWeight += followsFrequency.getValue( transition2class.get(pred),tranEC);
+			Collection<Transition> successors = findAllSuccessors(transition);
+			double successorWeight = 0;
+			for (Transition succ: successors) {
+				successorWeight += followsFrequency.getValue(tranEC, 
+								  				transition2class.get(succ));
 			}
-			transition.setWeight(predecessorWeight
+			transition.setWeight(successorWeight
 					+ startFrequency.getValue(tranEC)
 					+ endFrequency.getValue(tranEC) );
 		}
 	}
-
+	
 }

@@ -1,4 +1,4 @@
-package org.processmining.plugins.sdpwe;
+package org.processmining.plugins.spdwe;
 
 import org.deckfour.uitopia.api.event.TaskListener.InteractionResult;
 import org.deckfour.xes.classification.XEventClassifier;
@@ -24,8 +24,8 @@ import org.processmining.plugins.inductiveminer2.mining.InductiveMiner;
 import org.processmining.plugins.inductiveminer2.plugins.InductiveMinerPlugin;
 import org.processmining.plugins.inductiveminer2.variants.MiningParametersIMInfrequent;
 
-import au.edu.qut.pm.spn_discover.LogSourcedWeightEstimator;
-import au.edu.qut.pm.spn_discover.MeanScaledActivityPairRHEstimator;
+import au.edu.qut.pm.spn_estimator.LogSourcedWeightEstimator;
+import au.edu.qut.pm.spn_estimator.MeanScaledActivityPairRHEstimator;
 import au.edu.qut.prom.helpers.StochasticPetriNetUtils;
 
 @Plugin(name = "Mine Stochastic Petri net with estimators", 

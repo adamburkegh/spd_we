@@ -1,4 +1,4 @@
-package au.edu.qut.pm.spn_discover;
+package au.edu.qut.pm.spn_estimator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +12,8 @@ import org.processmining.acceptingpetrinet.models.AcceptingPetriNet;
 import org.processmining.framework.util.Pair;
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.Transition;
+
+import au.edu.qut.pm.stochastic.StochasticNetCloner;
 
 public abstract class AbstractFrequencyEstimator implements LogSourcedWeightEstimator {
 

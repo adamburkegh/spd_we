@@ -11,6 +11,7 @@ import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 import org.processmining.models.semantics.petrinet.Marking;
 
 import au.edu.qut.pm.ars.spn.StochasticMinerPlugin;
+import au.edu.qut.pm.stochastic.StochasticNetDescriptor;
 
 /**
  * Very like <class>RoggeSoltiSMP</class>, but invoking a local copy which has additional tracing

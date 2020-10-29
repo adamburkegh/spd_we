@@ -1,4 +1,4 @@
-package au.edu.qut.pm.spn_discover;
+package au.edu.qut.pm.stochastic;
 
 public interface ArtifactCreator {
 	public String getShortID();

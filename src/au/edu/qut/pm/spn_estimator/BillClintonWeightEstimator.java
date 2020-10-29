@@ -1,8 +1,10 @@
-package au.edu.qut.pm.spn_discover;
+package au.edu.qut.pm.spn_estimator;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import org.processmining.logabstractions.models.ColumnAbstraction;
+import org.processmining.logabstractions.models.MatrixAbstraction;
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.Place;
 import org.processmining.models.graphbased.directed.petrinet.elements.TimedTransition;
@@ -13,21 +15,25 @@ import au.edu.qut.prom.helpers.StochasticPetriNetUtils;
 /**
  * "When he comes to a fork in the road, he takes the fork" -- Jesse Jackson on Bill Clinton
  * 
- * Referred to as ForkDistributionEstimator in the accompanying paper.
- * 
  * @author burkeat
  *
+ * @param <E>
  */
-public class BillClintonEstimator extends AbstractFrequencyEstimator{
+public class BillClintonWeightEstimator<E> implements WeightEstimator{
 
-	@Override
-	public String getShortID() {
-		return "bce";
-	}
-
-	@Override
-	public String getReadableID() {
-		return "Fork Distributed (Bill Clinton) Estimator";
+	private MatrixAbstraction<E> followsFrequency;
+	private ColumnAbstraction<E> activityFrequency;
+	private ColumnAbstraction<E> startFrequency;
+	private Map<Transition, E> transition2class = new HashMap<Transition, E>();
+	
+	public BillClintonWeightEstimator(MatrixAbstraction<E> followsFrequency,
+			ColumnAbstraction<E> activityFrequency,
+			ColumnAbstraction<E> startFrequency,
+			Map<Transition, E> transition2class) {
+		this.followsFrequency = followsFrequency;
+		this.activityFrequency = activityFrequency;
+		this.startFrequency = startFrequency;
+		this.transition2class = transition2class;
 	}
 	
 	@Override
@@ -38,10 +44,12 @@ public class BillClintonEstimator extends AbstractFrequencyEstimator{
 	private void projectedFrequencyWeights(StochasticNet net ) {
 		Map<Place,Double> placeWeights = new HashMap<>();
 		for (Transition tran: net.getTransitions()) {
+			E tranEC = transition2class.get(tran);
 			for (Place succPlace: StochasticPetriNetUtils.successors(tran)) {
 				double totalPairWeight = 0;
 				for (Transition succTran: StochasticPetriNetUtils.successors(succPlace)) {
-					totalPairWeight += loadFollowFrequency(tran, succTran);
+					totalPairWeight += followsFrequency.getValue(tranEC, 
+			  				transition2class.get(succTran));
 				}
 				if (placeWeights.containsKey(succPlace)){
 					totalPairWeight += placeWeights.get(succPlace);
@@ -52,20 +60,23 @@ public class BillClintonEstimator extends AbstractFrequencyEstimator{
 			TimedTransition transition = (TimedTransition)tran;
 			transition.setWeight(0);
 		}
+		double traceCount = 0; // This would be slightly more efficient if passed in 
+		for (int i=0; i<startFrequency.getColumn().length; i++) {
+			traceCount += startFrequency.getColumn()[i];
+		}
 		for (Place place: net.getPlaces()) {
 			if (net.getGraph().getInEdges(place).isEmpty()) {
 				// Initialize start place
-				placeWeights.put(place, (double)traceCount);
-			}
-			if (placeWeights.get(place) == 0) {
-				placeWeights.put(place, 1.0);
+				placeWeights.put(place, traceCount);
 			}
 			double tranTotal = 0;
 			for (Transition tran: StochasticPetriNetUtils.successors(place)) {
-				tranTotal += loadActivityFrequency(tran);
+				E tranEC = transition2class.get(tran);
+				tranTotal += activityFrequency.getValue(tranEC);
 			}
 			for (Transition tran: StochasticPetriNetUtils.successors(place)) {
-				double freq = loadActivityFrequency(tran);
+				E tranEC = transition2class.get(tran);
+				double freq = activityFrequency.getValue(tranEC);
 				double placeBudget = placeWeights.get(place);
 				double weight = placeBudget * freq / tranTotal;
 				TimedTransition transition = (TimedTransition)tran;
@@ -73,6 +84,5 @@ public class BillClintonEstimator extends AbstractFrequencyEstimator{
 			}
 		}
 	}
-
 	
 }

@@ -5,6 +5,8 @@ import java.io.File;
 import org.deckfour.xes.model.XLog;
 import org.processmining.framework.plugin.PluginContext;
 
+import au.edu.qut.pm.stochastic.StochasticNetDescriptor;
+
 public interface StochasticNetLogMiner extends StochasticArtifactRun{
 	/**
 	 * A <code>UIPluginContext</code> is passed in by <code>ModelRunner</code>, but it is up to the implementing class

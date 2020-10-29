@@ -5,7 +5,7 @@ import org.processmining.framework.plugin.PluginContext;
 import org.processmining.logabstractions.models.ColumnAbstraction;
 
 import au.edu.qut.pm.spn_discover.EdgeStructuredEstimator;
-import au.edu.qut.pm.spn_discover.WeightEstimator;
+import au.edu.qut.pm.spn_estimator.WeightEstimator;
 
 public class StochasticAlphaMinerEdgeStructuredImpl<E> extends StochasticAlphaMinerImpl<E>{
 

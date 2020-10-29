@@ -1,4 +1,4 @@
-package au.edu.qut.pm.spn_discover;
+package au.edu.qut.pm.spn_estimator;
 
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 

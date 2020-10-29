@@ -11,6 +11,8 @@ import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 import org.processmining.models.semantics.petrinet.Marking;
 import org.processmining.plugins.stochasticpetrinet.miner.StochasticMinerPlugin;
 
+import au.edu.qut.pm.stochastic.StochasticNetDescriptor;
+
 public class RoggeSoltiSMP implements StochasticNetLogMiner {
 	
 	private static Logger LOGGER = LogManager.getLogger();

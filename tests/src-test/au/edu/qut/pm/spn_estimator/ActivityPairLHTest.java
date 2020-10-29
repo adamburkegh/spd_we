@@ -1,4 +1,4 @@
-package au.edu.qut.pm.spn_discover;
+package au.edu.qut.pm.spn_estimator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -15,14 +15,15 @@ import org.junit.Test;
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.Transition;
 
+import au.edu.qut.pm.spn_estimator.ActivityPairLHEstimator;
 import au.edu.qut.prom.helpers.PetriNetFragmentParser;
 import au.edu.qut.prom.helpers.StochasticPetriNetUtils;
 import au.edu.qut.prom.helpers.StochasticTestUtils;
 
-public class ActivityPairRHTest {
+public class ActivityPairLHTest {
 
 	private static Logger LOGGER = LogManager.getLogger();
-	
+		
 	private PetriNetFragmentParser parser = new PetriNetFragmentParser();
 	
 	@BeforeClass
@@ -36,13 +37,13 @@ public class ActivityPairRHTest {
 	}
 
 	private static StochasticNet estimate(StochasticNet minedModel, String ... traces) {
-		return StochasticTestUtils.estimateFromTraces(minedModel,new ActivityPairRHEstimator(),traces);
+		return StochasticTestUtils.estimateFromTraces(minedModel,new ActivityPairLHEstimator(),traces);
 	}
 	
 	private StochasticNet estimateWithDefault(StochasticNet expected, String ... traces) {
-		return StochasticTestUtils.estimateWithDefault(expected,new ActivityPairRHEstimator(),traces);
+		return StochasticTestUtils.estimateWithDefault(expected,new ActivityPairLHEstimator(),traces);
 	}
-
+	
 	private static void checkEqual(String message, StochasticNet expected, StochasticNet net) {
 		StochasticTestUtils.checkEqual(LOGGER,message,expected,net);
 	}
@@ -51,6 +52,7 @@ public class ActivityPairRHTest {
 	public void singleTransition() {
 		StochasticNet expected = parser.createNet("expected", 
 							"Start -> {a 2.0} -> End");
+		StochasticTestUtils.renamePlacesByTransition(expected);
 		StochasticNet net = estimateWithDefault(expected,"a");
 		checkEqual( "single transition", expected, net);
 		assertEquals(2,net.getEdges().size());
@@ -67,13 +69,13 @@ public class ActivityPairRHTest {
 	@Test
 	public void twoSequentialTransitions() {
 		StochasticNet expected = parser.createNet("expected", 
-				"Start -> {a 2.0} -> p1 -> {b} -> End");
+				"Start -> {a} -> p1 -> {b 2.0} -> End");
 		StochasticNet net = estimateWithDefault(expected,"a b");
+		checkEqual("two seq", expected, net);
 		assertEquals(4,net.getEdges().size());
 		assertEquals(3,net.getPlaces().size());
 		Collection<Transition> transitions = net.getTransitions();
 		assertEquals(2,transitions.size());
-		checkEqual("two seq", expected, net);
 		Set<String> expectedLabels = new HashSet<String>();
 		expectedLabels.add("a"); expectedLabels.add("b");
 		for (Transition transition: transitions) {
@@ -87,8 +89,9 @@ public class ActivityPairRHTest {
 	@Test
 	public void twoSequentialTransitionsTwoEvents() {
 		StochasticNet expected = parser.createNet("expected", 
-				"Start -> {a 4.0} -> p1 -> {b 2.0} -> End");
-		StochasticNet net = estimateWithDefault(expected,"a b","a b");
+				"Start -> {a 2.0} -> p1 -> {b 4.0} -> End");
+		StochasticNet net = estimateWithDefault(expected,"a b",
+									"a b");
 		checkEqual("two seq two events", expected, net);
 		// Interesting property - pure frequency estimators given different weights 
 		// (linearly related) to duplicated 
@@ -98,8 +101,8 @@ public class ActivityPairRHTest {
 	@Test
 	public void immediateChoice() {
 		StochasticNet expected = parser.createNet("expected", 
-				  					"Start -> {a 2.0} -> p1 -> {c 2.0} -> End");
-		parser.addToNet(expected,   "Start -> {b 2.0} -> p2 -> {c 2.0} -> End");
+				  					"Start -> {a} -> p1 -> {c 4.0} -> End");
+		parser.addToNet(expected,   "Start -> {b} -> p2 -> {c 4.0} -> End");
 		// a = 1 (start) + 1 (a c) + 0 (end)
 		// b = 1 (start) + 1 (b c) + 0 (end)
 		// c = 0 (start)           + 1 (end)
@@ -111,11 +114,12 @@ public class ActivityPairRHTest {
 	@Test
 	public void oneInlineChoiceUnevenWeights() {
 		StochasticNet expected = parser.createNet("expected", 
-				  "Start -> {a 8.0} -> p1 -> {b 3.0} -> p2 -> {d 4.0} -> End");
+				  "Start -> {a 4.0} -> p1 -> {b 3.0} -> p2 -> {d 8.0} -> End");
 		parser.addToNet(expected,     "p1 -> {c 1.0} -> p2");
-		StochasticTestUtils.renamePlacesByTransition(expected);
 		StochasticNet net = estimateWithDefault(expected,
-									"a b d","a b d","a b d",
+									"a b d",
+									"a b d",
+									"a b d",
 									"a c d");
 		assertTrue( StochasticPetriNetUtils.areEqual(expected, net) );
 	}
@@ -124,41 +128,21 @@ public class ActivityPairRHTest {
 	@Test
 	public void inlineChoice() {
 		StochasticNet expected = parser.createNet("expected", 
-				  "Start -> {a 4.0} -> p1 -> {b 1.0} -> p2 -> {d 2.0} -> End");
+				  "Start -> {a 2.0} -> p1 -> {b 1.0} -> p2 -> {d 4.0} -> End");
 		parser.addToNet(expected,     "p1 -> {c 1.0} -> p2");
-		StochasticNet net = estimateWithDefault(expected,"a b d",
-														 "a c d");
+		StochasticNet net = estimateWithDefault(expected,
+									"a b d",
+									"a c d");
 		assertTrue( StochasticPetriNetUtils.areEqual(expected, net) );
 	}
 	
-	
-	@Test
-	public void selfLoop() {
-		StochasticNet expected = parser.createNet("expected", 
-				  "Start -> {a 4.0} -> p1 -> {b 3.0} -> p2 -> {d 2.0} -> End");
-		parser.addToNet(expected,     "p1 -> {b 3.0} -> p3 -> {b 3.0} -> p3");
-		StochasticNet net = estimateWithDefault(expected,"a b d",
-														 "a b b d");
-		// known alpha classic limitation on self-loops
-		checkEqual("self loop", expected, net);
-	}
-	
-	@Test
-	public void twoLoop() {
-		StochasticNet expected = parser.createNet("expected", 
-				  "Start -> {a 4.0} -> p1 -> {b 3.0} -> End");
-		parser.addToNet(expected,     "p1 -> {b 3.0} -> p2 -> {c 1.0} -> p3 -> {b 3.0} -> End");
-		StochasticNet net = estimateWithDefault(expected,
-									"a b",
-									"a b c b");
-		checkEqual("two loop", expected, net);
-	}
-
 	@Test
 	public void threeLoop() {
 		StochasticNet expected = parser.createNet("expected", 
-				  "Start -> {a 4.0} -> p1 -> {b 3.0} -> End");
-		parser.addToNet(expected,     "p1 -> {b 3.0} -> p2 -> {c 1.0} -> p3 -> {d 1.0} -> p1");
+				  "Start -> {a 2.0} -> p1 -> {b 5.0} -> End");
+		parser.addToNet(expected,     "p1 -> {b 5.0} -> p2 -> {c 1.0} -> p3 -> {d 1.0} -> p1");
+		StochasticTestUtils.debug(expected, LOGGER);
+		StochasticTestUtils.renamePlacesByTransition(expected);
 		StochasticNet net = estimateWithDefault(expected,
 									"a b",
 									"a b c d b");
@@ -169,11 +153,10 @@ public class ActivityPairRHTest {
 	@Test
 	public void choiceDivergentBeforeFinal() {
 		StochasticNet expected = parser.createNet("expected", 
-				  "Start -> {a 4.0} -> p1 -> {b 1.0} -> End");
-		parser.addToNet(expected,     "p1 -> {c 1.0} -> End");
-		StochasticNet net = estimateWithDefault(expected,
-									"a b",
-									"a c");
+				  "Start -> {a 2.0} -> p1 -> {b 2.0} -> End");
+		parser.addToNet(expected,     "p1 -> {c 2.0} -> End");
+		StochasticNet net = estimateWithDefault(expected, "a b",
+														  "a c");
 		assertTrue( StochasticPetriNetUtils.areEqual(expected, net) );
 	}
 	
@@ -184,24 +167,24 @@ public class ActivityPairRHTest {
 		// It shows the alpha class algo producing an unsound and non free-choice
 		// workflow net
 		StochasticNet expected = parser.createNet("expected", 
-							     "Start -> {a 6.0} -> p1 -> {b 1.0} -> p2 -> {d 3.0} -> End");
-		parser.addToNet(expected,"Start -> {a 6.0} -> p1 -> {e 1.0} -> p2");
-		parser.addToNet(expected,"Start -> {a 6.0} -> p3 -> {c 1.0} -> p4 -> {d 3.0} -> End");
+							     "Start -> {a 3.0} -> p1 -> {b 1.0} -> p2 -> {d 6.0} -> End");
+		parser.addToNet(expected,"Start -> {a 3.0} -> p1 -> {e 1.0} -> p2");
+		parser.addToNet(expected,"Start -> {a 3.0} -> p3 -> {c 1.0} -> p4 -> {d 6.0} -> End");
 		parser.addToNet(expected,                    "p3 -> {e 1.0} -> p4");
 		StochasticNet net = estimateWithDefault(expected,
-									"a b c d","a c b d",
+									"a b c d",
+									"a c b d",
 									"a e d");
 		checkEqual( "unsound", expected, net);
 	}
-	
+
 	@Test
 	public void modelLargerThanLog() {
 		StochasticNet mined = parser.createNet("mined", 
-				"Start -> {a} -> p1 -> {b} -> p2 -> {c} -> End");
+				"Start -> {a} -> p1 -> {b} -> End");
 		StochasticNet expected = parser.createNet("expected", 
-				"Start -> {a 1.0} -> p1 -> {b 4.0} -> p2 -> {c 2.0} -> End");
-		StochasticNet net = estimate(mined,"b c",
-										   "b c");
+				"Start -> {a 4.0} -> p1 -> {b} -> End");
+		StochasticNet net = estimate(mined,"a","a");
 		checkEqual( "model larger", expected, net);
 	}
 
@@ -220,18 +203,18 @@ public class ActivityPairRHTest {
 										   "b d",
 										   "b b b d");
 		// pair frequencies:		weights:
-		// 	a c	1					a = 3 + 0 + (1) = 4  						
-		// 	a d	2					b = 2 + 0 + 2 + 2 = 6 					
+		// 	a c	1					a = 3  						
+		// 	a d	2					b = 2 + 2 = 4						
 		// 	b b	2					c = 1						
-		// 	b d	2					d = 4 						
+		// 	b d	2					d = 1 + 2 + 5 = 8						
 		// 	c d	1					tau = 1
 		StochasticNet expected = parser.createNet("expected",  
-				  "Start -> {a 4.0} -> p1 -> {c} -> p2 -> {d 5.0} -> End");
+				  "Start -> {a 3.0} -> p1 -> {c} -> p2 -> {d 8.0} -> End");
 		parser.addToNet(expected,     	  "p1 -> {tau} -> p2");
 		parser.addToNet(expected,     	  
-					"Start -> {b 6.0} -> p3 -> {b 6.0} -> p3");
+					"Start -> {b 4.0} -> p3 -> {b 4.0} -> p3");
 		parser.addToNet(expected,
-					"p3 -> {d 5.0} -> End");
+					"p3 -> {d 8.0} -> End");
 		checkEqual("running example", expected, net);		
 	}
 

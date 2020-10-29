@@ -23,8 +23,8 @@ import org.processmining.models.graphbased.directed.petrinet.elements.Place;
 import org.processmining.models.graphbased.directed.petrinet.elements.TimedTransition;
 import org.processmining.models.graphbased.directed.petrinet.elements.Transition;
 
-import au.edu.qut.pm.spn_discover.LogSourcedWeightEstimator;
-import au.edu.qut.pm.spn_discover.StochasticNetCloner;
+import au.edu.qut.pm.spn_estimator.LogSourcedWeightEstimator;
+import au.edu.qut.pm.stochastic.StochasticNetCloner;
 import au.edu.qut.xes.helpers.DelimitedTraceToXESConverter;
 
 public class StochasticTestUtils {

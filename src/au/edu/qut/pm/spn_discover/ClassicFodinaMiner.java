@@ -20,6 +20,7 @@ import org.processmining.plugins.bpmnminer.converter.CausalNetToPetrinet;
 import org.processmining.plugins.bpmnminer.plugins.FodinaMinerPlugin;
 import org.processmining.plugins.bpmnminer.types.MinerSettings;
 
+import au.edu.qut.pm.stochastic.StochasticNetDescriptor;
 import au.edu.qut.prom.helpers.StochasticPetriNetUtils;
 
 public class ClassicFodinaMiner implements StochasticNetLogMiner {

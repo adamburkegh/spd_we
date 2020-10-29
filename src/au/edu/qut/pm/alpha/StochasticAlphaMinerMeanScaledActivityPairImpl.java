@@ -3,8 +3,8 @@ package au.edu.qut.pm.alpha;
 import org.processmining.alphaminer.abstractions.AlphaRobustAbstraction;
 import org.processmining.framework.plugin.PluginContext;
 
-import au.edu.qut.pm.spn_discover.MeanScaledActivityPairRHWeightEstimator;
-import au.edu.qut.pm.spn_discover.WeightEstimator;
+import au.edu.qut.pm.spn_estimator.MeanScaledActivityPairRHWeightEstimator;
+import au.edu.qut.pm.spn_estimator.WeightEstimator;
 
 public class StochasticAlphaMinerMeanScaledActivityPairImpl<E> extends StochasticAlphaMinerImpl<E> {
 

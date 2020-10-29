@@ -1,4 +1,4 @@
-package org.processmining.plugins.spdwe;
+package org.processmining.plugins.stochasticweightestimation;
 
 import org.deckfour.uitopia.api.event.TaskListener.InteractionResult;
 import org.deckfour.xes.classification.XEventClassifier;

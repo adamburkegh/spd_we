@@ -9,7 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 
-import au.edu.qut.pm.spn_estimator.FrequencyEstimator;
 import au.edu.qut.prom.helpers.PetriNetFragmentParser;
 import au.edu.qut.prom.helpers.StochasticPetriNetUtils;
 import au.edu.qut.prom.helpers.StochasticTestUtils;

@@ -15,7 +15,6 @@ import org.junit.Test;
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.Transition;
 
-import au.edu.qut.pm.spn_estimator.ActivityPairLHEstimator;
 import au.edu.qut.prom.helpers.PetriNetFragmentParser;
 import au.edu.qut.prom.helpers.StochasticPetriNetUtils;
 import au.edu.qut.prom.helpers.StochasticTestUtils;

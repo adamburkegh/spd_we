@@ -29,6 +29,9 @@
 		<property name="java.source.version" value="8" />
 		<property name="java.target.version" value="${java.source.version}" />
 		
+		<property environment="env"/>
+		<property name="spd_we.prom.plugin.src.path" value="${env.USERPROFILE}/eclipse-workspace/StochasticWeightEstimation" />
+	
 		<property name="main.class" value="au.edu.qut.pm.spn_discover.ModelRunner" />
 
 
@@ -218,6 +221,53 @@
 
 	<target name="ivy-depend" depends="resolve" >
 		<ivy:report graph="false"/>
+	</target>
+	
+	<target name="prepare-plugin-src">
+		<!-- The ProM release has only a subset of the needed code. The usual way to represent this would be a library dependency,
+			 but it seems like overkill at this level of maturity. We copy the relevant packages to a local folder with a known name.
+			 -->
+		<copy todir="${spd_we.prom.plugin.src.path}/src/au/edu/qut/pm/stochastic" >
+			<fileset dir="src/au/edu/qut/pm/stochastic">
+				<include name="**/*.java"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${spd_we.prom.plugin.src.path}/src/au/edu/qut/pm/spn_estimator" >
+			<fileset dir="src/au/edu/qut/pm/spn_estimator">
+				<include name="**/*.java"/>
+			</fileset>
+		</copy>
+		<copy todir="${spd_we.prom.plugin.src.path}/src/au/edu/qut/prom" >
+			<fileset dir="src/au/edu/qut/prom">
+				<include name="**/*.java"/>
+			</fileset>
+		</copy>
+		<copy todir="${spd_we.prom.plugin.src.path}/src/au/edu/qut/xes" >
+			<fileset dir="src/au/edu/qut/xes">
+				<include name="**/*.java"/>
+			</fileset>
+		</copy>
+		<copy todir="${spd_we.prom.plugin.src.path}/src/org/processmining" >
+			<fileset dir="src/org/processmining">
+				<include name="**/*.java"/>
+			</fileset>
+		</copy>		
+		<copy todir="${spd_we.prom.plugin.src.path}/tests/src-test/au/edu/qut/pm/spn_estimator" >
+			<fileset dir="tests/src-test/au/edu/qut/pm/spn_estimator">
+				<include name="**/*.java"/>
+			</fileset>
+		</copy>
+		<copy todir="${spd_we.prom.plugin.src.path}/tests/src-test/au/edu/qut/prom" >
+			<fileset dir="tests/src-test/au/edu/qut/prom">
+				<include name="**/*.java"/>
+			</fileset>
+		</copy>
+		<copy todir="${spd_we.prom.plugin.src.path}/tests/src-test/au/edu/qut/xes" >
+			<fileset dir="tests/src-test/au/edu/qut/xes">
+				<include name="**/*.java"/>
+			</fileset>
+		</copy>
 	</target>
 
 	

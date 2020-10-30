@@ -1,4 +1,4 @@
-package org.processmining.plugins.stochasticweightestimation;
+package org.processmining.stochasticweightestimation.plugins;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

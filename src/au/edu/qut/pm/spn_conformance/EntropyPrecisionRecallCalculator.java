@@ -6,18 +6,17 @@ import org.deckfour.xes.classification.XEventClassifier;
 import org.deckfour.xes.model.XLog;
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.framework.plugin.ProMCanceller;
-import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
-import org.processmining.models.semantics.petrinet.Marking;
+import org.processmining.models.graphbased.directed.petrinet.elements.Place;
 import org.processmining.plugins.InductiveMiner.Pair;
 import org.processmining.stochasticawareconformancechecking.automata.Log2StochasticDeterministicFiniteAutomaton;
 import org.processmining.stochasticawareconformancechecking.automata.StochasticDeterministicFiniteAutomatonMapped;
 import org.processmining.stochasticawareconformancechecking.helperclasses.RelativeEntropy;
 import org.processmining.stochasticawareconformancechecking.helperclasses.StochasticPetriNet2StochasticDeterministicFiniteAutomaton2;
-import org.processmining.stochasticawareconformancechecking.plugins.StochasticPetriNet2StochasticDeterministicFiniteAutomatonPlugin;
 
 import au.edu.qut.pm.spn_discover.Measure;
 import au.edu.qut.pm.spn_discover.SPNQualityCalculator;
 import au.edu.qut.pm.spn_discover.TaskStats;
+import au.edu.qut.pm.stochastic.StochasticNetDescriptor;
 
 
 
@@ -43,7 +42,7 @@ public class EntropyPrecisionRecallCalculator implements SPNQualityCalculator {
 	}
 	
 	@Override
-	public void calculate(PluginContext context, StochasticNet net, XLog log, 
+	public void calculate(PluginContext context, StochasticNetDescriptor net, XLog log, 
 			XEventClassifier classifier, TaskStats stats) throws Exception 
 	{
 		LOGGER.info("Computing entropy-based quality measures (SL) ");
@@ -56,10 +55,17 @@ public class EntropyPrecisionRecallCalculator implements SPNQualityCalculator {
 							}
 						});
 
-		Marking initialMarking = StochasticPetriNet2StochasticDeterministicFiniteAutomatonPlugin
-				.guessInitialMarking(net);
+		// TODO debug
+		for (Place p: net.getNet().getPlaces()) {
+			for (Place pi: net.getInitialMarking() ) {
+				if (pi.equals(p) ) {
+					LOGGER.info("Found one");
+				}
+			}
+		}
+		// TODO
 		StochasticDeterministicFiniteAutomatonMapped<String> automatonB = StochasticPetriNet2StochasticDeterministicFiniteAutomaton2
-				.convert(net, initialMarking);
+				.convert(net.getNet(), net.getInitialMarking() );
 		final Pair<Double, Double> p = RelativeEntropy.relativeEntropyHalf(automatonA, automatonB);
 		stats.setMeasure(Measure.ENTROPY_RECALL, p.getA());
 		stats.setMeasure(Measure.ENTROPY_PRECISION, p.getB());

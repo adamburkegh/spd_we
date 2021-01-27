@@ -192,12 +192,23 @@ public class StochasticPetriNetUtils {
 		return result;
 	}
 
+	/**
+	 * Pre: unique label equivalence for places between the two nets. This is needed because 
+	 * a number of valid and interesting nets don't have input places with no incoming edges, ie,
+	 * they are not WorkflowNets. InductiveMiner and other miners can produce such nets under
+	 * important edge cases.
+	 * 
+	 * An earlier version of this checked for <code>net.getInEdges(newPlace).isEmpty()</code>.
+	 * 
+	 * @param initialMarking
+	 * @param net
+	 * @return
+	 */
 	public static Marking findEquivalentInitialMarking(Marking initialMarking, StochasticNet net) {
 		Marking newMarking = new Marking();
 		for (Place oldPlace: initialMarking) {
 			for (Place newPlace: net.getPlaces()) {
-				if (oldPlace.getLabel().equals(newPlace.getLabel()) 
-						&& net.getInEdges(newPlace).isEmpty() ) {
+				if (oldPlace.getLabel().equals(newPlace.getLabel() )) {
 					newMarking.add(newPlace);
 					return newMarking;
 				}

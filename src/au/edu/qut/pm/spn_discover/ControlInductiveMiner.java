@@ -23,7 +23,7 @@ import au.edu.qut.pm.stochastic.StochasticNetCloner;
 import au.edu.qut.pm.stochastic.StochasticNetDescriptor;
 import au.edu.qut.prom.helpers.StochasticPetriNetUtils;
 
-public class ClassicInductiveMiner implements StochasticNetLogMiner {
+public class ControlInductiveMiner implements StochasticNetLogMiner {
 
 	private static final Logger LOGGER = LogManager.getLogger();
 	

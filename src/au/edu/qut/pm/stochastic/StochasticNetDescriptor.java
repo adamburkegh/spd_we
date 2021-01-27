@@ -18,12 +18,12 @@ public class StochasticNetDescriptor {
 	}
 	
 	public StochasticNetDescriptor(String id, StochasticNet net, Marking initialMarking,
-			Set<Marking> finalMarking) {
+			Set<Marking> finalMarkings) {
 		super();
 		this.id = id;
 		this.net = net;
 		this.initialMarking = initialMarking;
-		this.finalMarkings = finalMarking;
+		this.finalMarkings = finalMarkings;
 	}
 	
 	public String getId() {

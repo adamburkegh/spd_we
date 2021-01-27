@@ -11,6 +11,7 @@ import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 import au.edu.qut.pm.spn_discover.Measure;
 import au.edu.qut.pm.spn_discover.SPNQualityCalculator;
 import au.edu.qut.pm.spn_discover.TaskStats;
+import au.edu.qut.pm.stochastic.StochasticNetDescriptor;
 
 /**
  * Just count the entities. Not very good for comparing abstractions due to problems of 
@@ -29,9 +30,10 @@ public class NaiveSyntacticSimplicityCalculator implements SPNQualityCalculator 
 	}
 	
 	@Override
-	public void calculate(PluginContext context, StochasticNet net, XLog log, 
+	public void calculate(PluginContext context, StochasticNetDescriptor netD, XLog log, 
 			XEventClassifier classifier, TaskStats stats) throws Exception 
 	{
+		StochasticNet net = netD.getNet();
 		stats.setMeasure(Measure.MODEL_ENTITY_COUNT, 
 				net.getPlaces().size() + net.getTransitions().size());
 		stats.setMeasure(Measure.MODEL_EDGE_COUNT, net.getEdges().size() );

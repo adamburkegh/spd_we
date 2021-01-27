@@ -17,7 +17,7 @@ import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
 import au.edu.qut.pm.spn_discover.ClassicAlphaMiner;
-import au.edu.qut.pm.spn_discover.ClassicInductiveMiner;
+import au.edu.qut.pm.spn_discover.ControlInductiveMiner;
 import au.edu.qut.pm.spn_discover.FlowerMiner;
 import au.edu.qut.pm.spn_discover.Measure;
 import au.edu.qut.pm.spn_discover.RunState;
@@ -158,7 +158,7 @@ public class SPNDiscoverReporter {
 	private static void registerMiners() {
 		Set<StochasticNetLogMiner> miners = new HashSet<>();
 		miners.add(new ClassicAlphaMiner());
-		miners.add(new ClassicInductiveMiner());
+		miners.add(new ControlInductiveMiner());
 		miners.add(new FlowerMiner());
 		for (StochasticNetLogMiner miner: miners) {
 			MINER_MAP.put(miner.getShortID(), miner);

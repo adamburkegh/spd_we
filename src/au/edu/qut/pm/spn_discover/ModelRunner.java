@@ -57,12 +57,16 @@ public class ModelRunner {
 		NAME;
 	}
 	
-	private static final String PNML = "pnml";
+	private static final String PNML 	   = "pnml";
+	private static final String XES_SUFFIX = ".xes";
 	
 	private static final String CONFIG_DATA_FILES 	= "mr.data.files";
 	private static final String CONFIG_DATA_DIR 	= "mr.data.dir";
 	private static final String CONFIG_OUTPUT_DIR 	= "mr.output.dir";
 	private static final String CONFIG_EXPORT_DOT 	= "mr.export.dot";
+	private static final String CONFIG_KFOLD_LOGS	= "mr.kfold.logs";
+	private static final String CONFIG_KFOLD_LOGS_START 
+												    = "mr.kfold.logs.start";
 	private static final String CONFIG_MINERS 		= "mr.miners";
 	private static final String CONFIG_MODEL_DIR 	= "mr.model.dir";
 	private static final String CONFIG_MODELS 		= "mr.model.files";
@@ -77,6 +81,8 @@ public class ModelRunner {
 	private String outputDir = "";
 	private String[] dataFiles = new String[0];
 	private boolean exportDOT = false;
+	private int kfoldLogs = 1;
+	private int kfoldLogsStart = 1;
 	private List<StochasticNetLogMiner> miners;
 	private List<LogSourcedWeightEstimator> estimators;
 	private List<PetrinetSource> models;
@@ -96,6 +102,8 @@ public class ModelRunner {
 			dataFiles = dataFilesStr.split(",");			
 		}
 		exportDOT = Boolean.valueOf( cfg.getProperty(CONFIG_EXPORT_DOT, "false") );
+		kfoldLogs = Integer.valueOf( cfg.getProperty(CONFIG_KFOLD_LOGS, "1") );
+		kfoldLogsStart = Integer.valueOf( cfg.getProperty(CONFIG_KFOLD_LOGS_START, "1") );
 		LOGGER.info("Using data location {}" , dataDir);
 		LOGGER.info("Using data files {}" , Arrays.deepToString(dataFiles));
 		String modelConfig = cfg.getProperty(CONFIG_MODELS, "");
@@ -229,6 +237,21 @@ public class ModelRunner {
 	private void runSingleMiner(StochasticNetLogMiner miner, String inputLogName)
 			throws Exception
 	{
+		if (kfoldLogs == 1) {
+			runSingleMinerRun(miner, inputLogName, inputLogName);
+		}else {
+			for (int i=kfoldLogsStart; i<kfoldLogs+1; i++) {
+				String df = logPrefix(inputLogName);
+				runSingleMinerRun( miner, df + "_k"  + i + XES_SUFFIX, 
+										  df + "_nk" + i + XES_SUFFIX);
+			}
+		}
+	}
+
+	private void runSingleMinerRun(StochasticNetLogMiner miner, String inputLogName, 
+								   String comparisonLogName) 
+										   throws Exception 
+	{
 		UIPluginContext uipc = 
 				new HeadlessUIPluginContext(new ConsoleUIPluginContext(), "spmrunner_logparser");	
 		final String SEP = " -- ";
@@ -256,7 +279,10 @@ public class ModelRunner {
 			stats.markEnd();
 			uipc = new HeadlessUIPluginContext(new ConsoleUIPluginContext(), "spmrunner_postrun");	
 			if (miner.isStochasticNetProducer()) {
-				calculatePostStats(uipc,inputLogPrefix,miner,log,runStats);
+				TaskStats compStats = new TaskStats("complog"); 
+				// note these log count stats in compStats currently unused
+				XLog compLog = loadLog(uipc, comparisonLogName, compStats);
+				calculatePostStats(uipc,inputLogPrefix,miner,compLog,runStats);
 				runStats.markEnd();
 			}
 		} catch (Exception e) {
@@ -268,8 +294,23 @@ public class ModelRunner {
 		noteRunEnd(miner, inputLogPrefix, outputModelName, runStats);
 	}
 
-	private void runEstimator(LogSourcedWeightEstimator underlyingEstimator, String inputLogName, 
-			PetrinetSource modelSource)
+	private void runSingleEstimator(LogSourcedWeightEstimator underlyingEstimator, String inputLogName,
+									PetrinetSource modelSource) throws Exception
+	{
+		if (kfoldLogs == 1) {
+			runEstimator(underlyingEstimator, inputLogName, inputLogName, modelSource);
+		}else {
+			for (int i=kfoldLogsStart; i<kfoldLogs+1; i++) {
+				String df = logPrefix(inputLogName);
+				runEstimator( underlyingEstimator, df + "_k"  + i + XES_SUFFIX, 
+										  		   df + "_nk" + i + XES_SUFFIX,
+										  		   modelSource);
+			}
+		}
+	}
+	
+	private void runEstimator(LogSourcedWeightEstimator underlyingEstimator, String inputLogName,
+			String comparisonLogName, PetrinetSource modelSource)
 		throws Exception
 	{
 		String inputLogPrefix = logPrefix(inputLogName);
@@ -292,7 +333,10 @@ public class ModelRunner {
 			storeModel(smodelFile,estimator.getStochasticNetDescriptor());
 			stats = new TaskStats("spmrunner_postrun"); stats.markRunning();
 			uipc = new HeadlessUIPluginContext(new ConsoleUIPluginContext(), "spmrunner_postrun");	
-			calculatePostStats(uipc,inputLogPrefix,estimator,log,runStats);
+			TaskStats compStats = new TaskStats("complog"); 
+			// note these log count stats in compStats currently unused
+			XLog compLog = loadLog(uipc, comparisonLogName, compStats);
+			calculatePostStats(uipc,inputLogPrefix,estimator,compLog,runStats);
 			runStats.markEnd();
 		} catch (Exception e) {
 			stats.markFailed(e.getMessage());
@@ -397,7 +441,7 @@ public class ModelRunner {
 		TaskStats stats = null;
 		for (SPNQualityCalculator calc: calculators) {
 			stats = makeNewTask("calculate " + calc.getReadableId());
-			calc.calculate(context, miner.getStochasticNetDescriptor().getNet(), log, 
+			calc.calculate(context, miner.getStochasticNetDescriptor(), log, 
 					classifierFor(log), stats);
 			closeTask(runStats,stats);
 			// Conservatively export stats after every run
@@ -444,7 +488,7 @@ public class ModelRunner {
 	private void runEstimatorsOnLoadedModels(String df) throws Exception {
 		for (PetrinetSource model: models) {
 			for (LogSourcedWeightEstimator estimator: estimators) {
-				runEstimator( estimator, df, model);
+				runSingleEstimator( estimator, df, model);
 			}				
 		}
 	}
@@ -461,7 +505,7 @@ public class ModelRunner {
 						new PetrinetSource( apn,
 											miner.getShortID() );
 				for (LogSourcedWeightEstimator estimator: estimators) {
-					runEstimator( estimator, df, pnSource);
+					runSingleEstimator( estimator, df, pnSource);
 				}								
 			}
 		}

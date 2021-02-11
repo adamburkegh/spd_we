@@ -6,7 +6,6 @@ import org.deckfour.xes.classification.XEventClassifier;
 import org.deckfour.xes.model.XLog;
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.framework.plugin.ProMCanceller;
-import org.processmining.models.graphbased.directed.petrinet.elements.Place;
 import org.processmining.plugins.InductiveMiner.Pair;
 import org.processmining.stochasticawareconformancechecking.automata.Log2StochasticDeterministicFiniteAutomaton;
 import org.processmining.stochasticawareconformancechecking.automata.StochasticDeterministicFiniteAutomatonMapped;
@@ -55,15 +54,6 @@ public class EntropyPrecisionRecallCalculator implements SPNQualityCalculator {
 							}
 						});
 
-		// TODO debug
-		for (Place p: net.getNet().getPlaces()) {
-			for (Place pi: net.getInitialMarking() ) {
-				if (pi.equals(p) ) {
-					LOGGER.info("Found one");
-				}
-			}
-		}
-		// TODO
 		StochasticDeterministicFiniteAutomatonMapped<String> automatonB = StochasticPetriNet2StochasticDeterministicFiniteAutomaton2
 				.convert(net.getNet(), net.getInitialMarking() );
 		final Pair<Double, Double> p = RelativeEntropy.relativeEntropyHalf(automatonA, automatonB);

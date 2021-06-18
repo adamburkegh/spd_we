@@ -96,7 +96,8 @@ public class AlignmentEstimator implements LogSourcedWeightEstimator {
 				while (itType.hasNext()) {
 					StepTypes type = itType.next();
 					Object node = itNode.next();
-					if (type == StepTypes.MREAL || type == StepTypes.LMGOOD) {
+					if (type == StepTypes.MREAL || type == StepTypes.LMGOOD 
+							|| type == StepTypes.MINVI) {
 						if (!(node instanceof Transition)){
 							LOGGER.error("Node {} wasn't a transition",node);
 							throw new RuntimeException("Node wasn't a transition" + node.toString());

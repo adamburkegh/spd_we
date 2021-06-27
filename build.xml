@@ -30,8 +30,7 @@
 		<property name="java.target.version" value="${java.source.version}" />
 		
 		<property environment="env"/>
-		<property name="spd_we.prom.plugin.src.path" value="${env.USERPROFILE}/eclipse-workspace/StochasticWeightEstimation" />
-	
+		<property name="spd_we.prom.plugin.src.path" value="c:/working/source/eclipse-workspace/StochasticWeightEstimation" />
 		<property name="main.class" value="au.edu.qut.pm.spn_discover.ModelRunner" />
 
 

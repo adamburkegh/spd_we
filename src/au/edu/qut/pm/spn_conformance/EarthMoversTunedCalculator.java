@@ -7,7 +7,7 @@ import org.deckfour.xes.model.XLog;
 import org.processmining.earthmoversstochasticconformancechecking.parameters.EMSCParametersDefault;
 import org.processmining.earthmoversstochasticconformancechecking.parameters.EMSCParametersLogModel;
 import org.processmining.earthmoversstochasticconformancechecking.parameters.EMSCParametersLogModelAbstract;
-import org.processmining.earthmoversstochasticconformancechecking.parameters.TerminationStrategyImpl;
+import org.processmining.earthmoversstochasticconformancechecking.parameters.LanguageGenerationStrategyFromModelImpl;
 import org.processmining.earthmoversstochasticconformancechecking.plugins.EarthMoversStochasticConformancePlugin;
 import org.processmining.earthmoversstochasticconformancechecking.tracealignments.StochasticTraceAlignmentsLogModel;
 import org.processmining.framework.plugin.PluginContext;
@@ -27,7 +27,7 @@ public class EarthMoversTunedCalculator implements SPNQualityCalculator {
 		public EMSCParametersLogModelTuned(XEventClassifier classifier) {
 			super(EMSCParametersDefault.defaultDistanceMatrix, 
 					classifier,
-					new TerminationStrategyImpl(1000 * 60 * 20, MASS_COVERAGE), 
+					new LanguageGenerationStrategyFromModelImpl(1000 * 60 * 20, MASS_COVERAGE), 
 					EMSCParametersDefault.defaultDebug, 
 					false);
 		}

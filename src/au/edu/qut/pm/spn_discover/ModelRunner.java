@@ -331,6 +331,9 @@ public class ModelRunner {
 			stats.markEnd(); runStats.addTask(stats);
 			File smodelFile = new File(outputModelName);
 			storeModel(smodelFile,estimator.getStochasticNetDescriptor());
+			stats = makeNewTask("visualize");
+			exportVisualization(estimator,inputLogPrefix);
+			stats.markEnd();
 			stats = new TaskStats("spmrunner_postrun"); stats.markRunning();
 			uipc = new HeadlessUIPluginContext(new ConsoleUIPluginContext(), "spmrunner_postrun");	
 			TaskStats compStats = new TaskStats("complog"); 
@@ -386,7 +389,7 @@ public class ModelRunner {
 	}
 
 
-	private void exportVisualization(StochasticNetLogMiner miner, String inputLogPrefix) throws IOException
+	private void exportVisualization(StochasticArtifactRun miner, String inputLogPrefix) throws IOException
 	{
 		if (!exportDOT)
 			return;

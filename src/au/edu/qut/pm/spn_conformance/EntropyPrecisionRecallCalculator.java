@@ -45,7 +45,7 @@ public class EntropyPrecisionRecallCalculator implements SPNQualityCalculator {
 			XEventClassifier classifier, TaskStats stats) throws Exception 
 	{
 		LOGGER.info("Computing entropy-based quality measures (SL) ");
-		StochasticDeterministicFiniteAutomatonMapped<String> automatonA = Log2StochasticDeterministicFiniteAutomaton
+		StochasticDeterministicFiniteAutomatonMapped automatonA = Log2StochasticDeterministicFiniteAutomaton
 				.convert(log, 
 						classifier, 
 						new ProMCanceller() {
@@ -54,7 +54,7 @@ public class EntropyPrecisionRecallCalculator implements SPNQualityCalculator {
 							}
 						});
 
-		StochasticDeterministicFiniteAutomatonMapped<String> automatonB = StochasticPetriNet2StochasticDeterministicFiniteAutomaton2
+		StochasticDeterministicFiniteAutomatonMapped automatonB = StochasticPetriNet2StochasticDeterministicFiniteAutomaton2
 				.convert(net.getNet(), net.getInitialMarking() );
 		final Pair<Double, Double> p = RelativeEntropy.relativeEntropyHalf(automatonA, automatonB);
 		stats.setMeasure(Measure.ENTROPY_RECALL, p.getA());

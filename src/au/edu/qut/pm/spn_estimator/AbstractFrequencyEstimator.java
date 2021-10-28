@@ -23,6 +23,7 @@ public abstract class AbstractFrequencyEstimator implements LogSourcedWeightEsti
 	protected Map<String,Double> endFrequency = new HashMap<>();
 	protected Map<String, XEventClass> activity2class = new HashMap<String, XEventClass>();
 	protected int traceCount = 0;
+	protected boolean minCloning;
 
 
 	public void scanLog(XLog log, XEventClassifier classifier) {
@@ -72,7 +73,11 @@ public abstract class AbstractFrequencyEstimator implements LogSourcedWeightEsti
 	@Override
 	public StochasticNet estimateWeights(AcceptingPetriNet pnet, XLog log, XEventClassifier classifier) {
 		scanLog(log,classifier);
-		StochasticNet snet = StochasticNetCloner.cloneFromPetriNet(pnet.getNet());
+		StochasticNet snet = null;
+		if (minCloning && pnet.getNet() instanceof StochasticNet)
+			snet = (StochasticNet)pnet.getNet();
+		else
+			snet = StochasticNetCloner.cloneFromPetriNet(pnet.getNet());
 		estimateWeights(snet); 
 		return snet;
 	}
@@ -105,5 +110,9 @@ public abstract class AbstractFrequencyEstimator implements LogSourcedWeightEsti
 		return value;
 	}
 
+	@Override
+	public void setMinimizeCloning(boolean minCloning) {
+		this.minCloning = minCloning;
+	}
 	
 }

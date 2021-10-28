@@ -1,5 +1,7 @@
 <ivysettings>
-    <settings defaultResolver="default" />   
+    <settings defaultResolver="default" />
+    <property name="m2-pattern" 
+        value="${user.home}/.m2/repository/[organisation]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]" override="false" />
     <resolvers>
         <url name="prom" checkmodified="false">
             <ivy pattern="https://svn.win.tue.nl/repos/[organisation]/Releases/Packages/[module]/[revision]/ivy.xml" />
@@ -15,15 +17,20 @@
             <artifact pattern="${ivy.settings.dir}/ldlib/splitminer/[artifact]-[revision].[ext]"/>
             <artifact pattern="${ivy.settings.dir}/ldlib/splitminer/lib/[artifact]-[revision].[ext]"/>
         </filesystem>
+        <filesystem name="local-maven2" m2compatible="true" >
+            <artifact pattern="${m2-pattern}"/>
+            <ivy pattern="${m2-pattern}"/>
+        </filesystem>
         <ibiblio name="maven2" m2compatible="true"/>
         <chain name="default" returnFirst="true">  
             <resolver ref="prom" />  
-            <resolver ref="prom-libs" />  
+            <resolver ref="prom-libs" />
+            <resolver ref="local-maven2" />  
             <resolver ref="maven2" />
             <resolver ref="local" />    
         </chain>  
     </resolvers>
     <modules>
-        <module organisation="fodina" name="fodina" resolver="local"/>
+        <module organisation="fodina" name="fodina" resolver="local"/> 
     </modules>
 </ivysettings>

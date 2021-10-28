@@ -11,4 +11,6 @@ public interface LogSourcedWeightEstimator extends WeightEstimator, ArtifactCrea
 
 	public StochasticNet estimateWeights(AcceptingPetriNet net, XLog log, XEventClassifier classifier);
 	
+	public void setMinimizeCloning(boolean minCloning);
+	
 }

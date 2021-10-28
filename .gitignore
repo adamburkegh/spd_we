@@ -3,9 +3,12 @@ bindist/
 dist/
 doc/
 ivy/
+data/
 var/
 .settings/
 out.log
 .classpath
 .project
 
+/.gradle/
+/build/

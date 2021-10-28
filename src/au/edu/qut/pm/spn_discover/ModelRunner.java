@@ -79,18 +79,18 @@ public class ModelRunner {
 	
 	private String dataDir = "";
 	private String outputDir = "";
-	private String[] dataFiles = new String[0];
+	protected String[] dataFiles = new String[0];
 	private boolean exportDOT = false;
 	private int kfoldLogs = 1;
 	private int kfoldLogsStart = 1;
-	private List<StochasticNetLogMiner> miners;
-	private List<LogSourcedWeightEstimator> estimators;
+	protected List<StochasticNetLogMiner> miners;
+	protected List<LogSourcedWeightEstimator> estimators;
 	private List<PetrinetSource> models;
 	private List<SPNQualityCalculator> calculators;
 	private boolean exportRun = true;
 	private Classifier classifier = Classifier.NAME;
 
-	private void configure() throws Exception{
+	protected void configure() throws Exception{
 		Properties cfg = new Properties();
 		cfg.load(new FileInputStream( "config/instance.properties" ));
 		dataDir = cfg.getProperty(CONFIG_DATA_DIR,"data");
@@ -248,7 +248,7 @@ public class ModelRunner {
 		}
 	}
 
-	private void runSingleMinerRun(StochasticNetLogMiner miner, String inputLogName, 
+	protected void runSingleMinerRun(StochasticNetLogMiner miner, String inputLogName, 
 								   String comparisonLogName) 
 										   throws Exception 
 	{
@@ -309,7 +309,7 @@ public class ModelRunner {
 		}
 	}
 	
-	private void runEstimator(LogSourcedWeightEstimator underlyingEstimator, String inputLogName,
+	protected StochasticNetDescriptor runEstimator(LogSourcedWeightEstimator underlyingEstimator, String inputLogName,
 			String comparisonLogName, PetrinetSource modelSource)
 		throws Exception
 	{
@@ -347,7 +347,8 @@ public class ModelRunner {
 			LOGGER.error("Run failed for {}", estimator.getReadableID(), e);
 		}
 		runStats.addTask(stats);
-		noteRunEnd(estimator, inputLogPrefix, outputModelName, runStats);		
+		noteRunEnd(estimator, inputLogPrefix, outputModelName, runStats);
+		return estimator.getStochasticNetDescriptor();
 	}
 
 	

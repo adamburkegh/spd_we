@@ -195,4 +195,9 @@ public class AlignmentEstimator implements LogSourcedWeightEstimator {
 		return result;
 	}
 
+	@Override
+	public void setMinimizeCloning(boolean minCloning) {
+		// No-op
+	}
+
 }

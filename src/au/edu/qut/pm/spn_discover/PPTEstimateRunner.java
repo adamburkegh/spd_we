@@ -62,7 +62,7 @@ public class PPTEstimateRunner extends ModelRunner{
 		LOGGER.info("ProbProcessTree estimator runner initializing");
 		LOGGER.debug( "java.library.path=" + System.getProperty("java.library.path") );
 
-		ModelRunner modelRunner = new ModelRunner();
+		ModelRunner modelRunner = new PPTEstimateRunner();
 		modelRunner.configure();
 		modelRunner.runAll();
 			

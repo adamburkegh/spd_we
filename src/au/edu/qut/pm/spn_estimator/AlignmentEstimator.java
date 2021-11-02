@@ -19,6 +19,7 @@ import org.processmining.models.graphbased.directed.petrinet.StochasticNet.Distr
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet.ExecutionPolicy;
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet.TimeUnit;
 import org.processmining.models.graphbased.directed.petrinet.elements.Place;
+import org.processmining.models.graphbased.directed.petrinet.elements.TimedTransition;
 import org.processmining.models.graphbased.directed.petrinet.elements.Transition;
 import org.processmining.models.graphbased.directed.petrinet.impl.StochasticNetImpl;
 import org.processmining.models.semantics.petrinet.Marking;
@@ -42,6 +43,7 @@ import nl.tue.astar.AStarException;
 public class AlignmentEstimator implements LogSourcedWeightEstimator {
 
 	private static Logger LOGGER = LogManager.getLogger();
+	private boolean minCloning = false;
 	
 	@Override
 	public void estimateWeights(StochasticNet net) {
@@ -107,9 +109,11 @@ public class AlignmentEstimator implements LogSourcedWeightEstimator {
 				}
 			}
 		}
-		StochasticNet result = copyNet(inputNet, transition2occurrence);
+		// TODO StochasticNet result = copyNet(inputNet, transition2occurrence);
+		StochasticNet result = concludeNet(inputNet, transition2occurrence);
 		return result;	
 	}
+
 
 	private void checkAndDefaultMarkings(AcceptingPetriNet inputNet) {
 		if (inputNet.getInitialMarking().isEmpty() ) {
@@ -165,6 +169,20 @@ public class AlignmentEstimator implements LogSourcedWeightEstimator {
 		return mapping;
 	}
 
+	private StochasticNet concludeNet(AcceptingPetriNet inputNet, TObjectIntMap<Transition> transition2occurrence) {
+		if (minCloning && inputNet.getNet() instanceof StochasticNet)
+			return applyWeights((StochasticNet)inputNet.getNet(),transition2occurrence);
+		return copyNet(inputNet,transition2occurrence);
+	}
+	
+	private StochasticNet applyWeights(StochasticNet snet, TObjectIntMap<Transition> transition2occurrence) {
+		for (Transition inputTransition : snet.getTransitions()) {
+			TimedTransition resultTransition = (TimedTransition)inputTransition;
+			resultTransition.setWeight(transition2occurrence.get(inputTransition));
+		}
+		return snet;
+	}
+
 	private StochasticNet copyNet(AcceptingPetriNet inputNet, TObjectIntMap<Transition> transition2occurrence) {
 		StochasticNet result = new StochasticNetImpl(inputNet.getNet().getLabel());
 		result.setExecutionPolicy(ExecutionPolicy.RACE_ENABLING_MEMORY);
@@ -197,7 +215,7 @@ public class AlignmentEstimator implements LogSourcedWeightEstimator {
 
 	@Override
 	public void setMinimizeCloning(boolean minCloning) {
-		// No-op
+		this.minCloning  = minCloning;
 	}
 
 }

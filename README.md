@@ -26,6 +26,8 @@ Once installed, the plugins are
 
 The test scaffold entry point is `ModelRunner.java`.
 
+'PPTEstimateRunner.java' is a simple tool for applying estimated weights to process tree models, so long as the original discovery algorithm output a process tree.
+
 The reporting entry point is `SPNDiscoverReporter.java`.
 
 Some scripts for running on Windows and Unix are in `scripts/`.

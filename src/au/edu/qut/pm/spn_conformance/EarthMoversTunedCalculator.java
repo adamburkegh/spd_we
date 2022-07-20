@@ -4,10 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.deckfour.xes.classification.XEventClassifier;
 import org.deckfour.xes.model.XLog;
-import org.processmining.earthmoversstochasticconformancechecking.parameters.EMSCParametersDefault;
-import org.processmining.earthmoversstochasticconformancechecking.parameters.EMSCParametersLogModel;
-import org.processmining.earthmoversstochasticconformancechecking.parameters.EMSCParametersLogModelAbstract;
-import org.processmining.earthmoversstochasticconformancechecking.parameters.LanguageGenerationStrategyFromModelImpl;
+import org.processmining.earthmoversstochasticconformancechecking.parameters.EMSCParametersLogModelDefault;
+import org.processmining.earthmoversstochasticconformancechecking.parameters.LanguageGenerationStrategyFromModelAbstract;
+import org.processmining.earthmoversstochasticconformancechecking.parameters.LanguageGenerationStrategyFromModelDefault;
 import org.processmining.earthmoversstochasticconformancechecking.plugins.EarthMoversStochasticConformancePlugin;
 import org.processmining.earthmoversstochasticconformancechecking.tracealignments.StochasticTraceAlignmentsLogModel;
 import org.processmining.framework.plugin.PluginContext;
@@ -22,18 +21,6 @@ public class EarthMoversTunedCalculator implements SPNQualityCalculator {
 	
 	private static final double MASS_COVERAGE = 0.80;
 	
-	private class EMSCParametersLogModelTuned extends EMSCParametersLogModelAbstract {
-
-		public EMSCParametersLogModelTuned(XEventClassifier classifier) {
-			super(EMSCParametersDefault.defaultDistanceMatrix, 
-					classifier,
-					new LanguageGenerationStrategyFromModelImpl(1000 * 60 * 20, MASS_COVERAGE), 
-					EMSCParametersDefault.defaultDebug, 
-					false);
-		}
-
-	}
-	
 	private static Logger LOGGER = LogManager.getLogger();
 
 	@Override
@@ -46,7 +33,14 @@ public class EarthMoversTunedCalculator implements SPNQualityCalculator {
 			XEventClassifier classifier, TaskStats stats) throws Exception 
 	{
 		LOGGER.info("Computing earth-movers' distance (SL) with mass coverage: " + MASS_COVERAGE);
-		EMSCParametersLogModel parameters = new EMSCParametersLogModelTuned(classifier);
+		EMSCParametersLogModelDefault parameters = new EMSCParametersLogModelDefault();
+		parameters.setComputeStochasticTraceAlignments(false);
+		parameters.setDebug(false);
+		parameters.setLogClassifier(classifier);
+		LanguageGenerationStrategyFromModelAbstract terminationStrategy = new LanguageGenerationStrategyFromModelDefault();
+		terminationStrategy.setMaxMassCovered(MASS_COVERAGE);
+		parameters.setModelTerminationStrategy(terminationStrategy);
+		
 		LOGGER.debug("Initial marking {}",net.getInitialMarking());
 		StochasticTraceAlignmentsLogModel stAlign = EarthMoversStochasticConformancePlugin.measureLogModel(log, net.getNet(),
 				net.getInitialMarking(), parameters, new ProMCanceller() {

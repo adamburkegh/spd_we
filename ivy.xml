@@ -21,6 +21,6 @@
         <!-- Splitminer unpackaged dependency invoked OUT OF PROCESS, see ivysettings and ldlib directory -->
         <dependency org="org.simpleframework" name="simple-xml" rev="2.7.1" changing="false" transitive="true" />
         <!-- Local maven dependencies (Oct 2021) -->
-        <dependency org="qut.pm" name="prob-process-tree" rev="0.2.0" changing="true" transitive="true" />
+        <dependency org="qut.pm" name="prob-process-tree" rev="0.2.1" changing="true" transitive="true" />
      </dependencies>
 </ivy-module>

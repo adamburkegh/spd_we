@@ -234,7 +234,7 @@ public class ModelRunner {
 		}
 	}
 	
-	private void runSingleMiner(StochasticNetLogMiner miner, String inputLogName)
+	private void runKfoldAwareSingleMiner(StochasticNetLogMiner miner, String inputLogName)
 			throws Exception
 	{
 		if (kfoldLogs == 1) {
@@ -297,16 +297,7 @@ public class ModelRunner {
 	private void runSingleEstimator(LogSourcedWeightEstimator underlyingEstimator, String inputLogName,
 									PetrinetSource modelSource) throws Exception
 	{
-		if (kfoldLogs == 1) {
-			runEstimator(underlyingEstimator, inputLogName, inputLogName, modelSource);
-		}else {
-			for (int i=kfoldLogsStart; i<kfoldLogs+1; i++) {
-				String df = logPrefix(inputLogName);
-				runEstimator( underlyingEstimator, df + "_k"  + i + XES_SUFFIX, 
-										  		   df + "_nk" + i + XES_SUFFIX,
-										  		   modelSource);
-			}
-		}
+		runEstimator(underlyingEstimator, inputLogName, inputLogName, modelSource);
 	}
 	
 	protected StochasticNetDescriptor runEstimator(LogSourcedWeightEstimator underlyingEstimator, String inputLogName,
@@ -499,8 +490,25 @@ public class ModelRunner {
 
 	private void runAllMiners(String df) throws Exception {
 		for (StochasticNetLogMiner miner: miners) {
-			runSingleMiner( miner, df);
-			if (!miner.isStochasticNetProducer()) {
+			if (miner.isStochasticNetProducer()) {
+				runKfoldAwareSingleMiner( miner, df);
+			}else {			
+				runKfoldAwareSingleMinerAndEstimators(df, miner);								
+			}
+		}
+	}
+
+	private void runKfoldAwareSingleMinerAndEstimators(String inputLogName, StochasticNetLogMiner miner) 
+			throws Exception 
+	{
+		if (kfoldLogs == 1) {
+			runSingleMinerRun(miner, inputLogName, inputLogName);		
+		}else {
+			for (int i=kfoldLogsStart; i<kfoldLogs+1; i++) {
+				String logPrefix = logPrefix(inputLogName);
+				String kinputLog = logPrefix + "_k"  + i + XES_SUFFIX;
+				String kcompLog = logPrefix + "_nk" + i + XES_SUFFIX;
+				runSingleMinerRun(miner, kinputLog, kcompLog);
 				AcceptingPetriNet apn = 
 						new AcceptingPetriNetImpl(miner.getStochasticNetDescriptor().getNet(),
 								miner.getStochasticNetDescriptor().getInitialMarking(),
@@ -509,8 +517,10 @@ public class ModelRunner {
 						new PetrinetSource( apn,
 											miner.getShortID() );
 				for (LogSourcedWeightEstimator estimator: estimators) {
-					runSingleEstimator( estimator, df, pnSource);
-				}								
+					runEstimator( estimator, kinputLog , 
+										  		   kcompLog,
+										  		   pnSource);
+				}
 			}
 		}
 	}

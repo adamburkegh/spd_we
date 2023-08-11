@@ -109,7 +109,6 @@ public class AlignmentEstimator implements LogSourcedWeightEstimator {
 				}
 			}
 		}
-		// TODO StochasticNet result = copyNet(inputNet, transition2occurrence);
 		StochasticNet result = concludeNet(inputNet, transition2occurrence);
 		return result;	
 	}

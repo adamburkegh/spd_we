@@ -90,7 +90,7 @@ clncreators <- recode(rundata$Short.Id,
 			     "bce-fodina" = "fork-fodina",
                        "bce-inductive" = "fork-inductive",
                        "bce-split" = "fork-split",
-                       "rssmt" = "rsd")
+                       "rssmt" = "gdt_spn")
 
 rundata$Short.Id <- clncreators
 

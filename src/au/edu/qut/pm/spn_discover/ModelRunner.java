@@ -502,7 +502,17 @@ public class ModelRunner {
 			throws Exception 
 	{
 		if (kfoldLogs == 1) {
-			runSingleMinerRun(miner, inputLogName, inputLogName);		
+			runSingleMinerRun(miner, inputLogName, inputLogName);
+			AcceptingPetriNet apn = 
+					new AcceptingPetriNetImpl(miner.getStochasticNetDescriptor().getNet(),
+							miner.getStochasticNetDescriptor().getInitialMarking(),
+							miner.getStochasticNetDescriptor().getFinalMarkings() );
+			PetrinetSource pnSource = 
+					new PetrinetSource( apn,
+										miner.getShortID() );
+			for (LogSourcedWeightEstimator estimator: estimators) {
+				runEstimator( estimator, inputLogName ,inputLogName, pnSource);
+			}
 		}else {
 			for (int i=kfoldLogsStart; i<kfoldLogs+1; i++) {
 				String logPrefix = logPrefix(inputLogName);

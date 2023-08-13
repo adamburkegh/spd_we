@@ -12,8 +12,8 @@ spmcolours <- function (){
 export_graph <- function (workingPath, picName, bpo, 
 		ctMeasure, ctLog, ctShortMeasure, colName, ylim)
 {
-	
-	bpo <- rundata %>% filter (Log == ctLog)    # weird: overwrites param from global
+  # weird and hacky: overwrites param from global
+	bpo <- rundata %>% filter (Log == ctLog) %>% arrange(graphsortorder)
 	tb <- as.numeric(bpo[[colName]])
 	bnames <- bpo$Short.Id
 	addLabel <- FALSE
@@ -117,6 +117,7 @@ clncreators <- recode(rundata$Short.Id,
 
 
 rundata$Short.Id <- clncreators
+rundata$graphsortorder <- recode(rundata$Short.Id,"gdt_spn" = "zzgdt_spn")
 
 logs <- unique(rundata$Log)
 

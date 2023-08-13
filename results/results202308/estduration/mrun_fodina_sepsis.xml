@@ -1,0 +1,30 @@
+<runStats miner="Fodina Miner" machineName="SEF-1953019678" runnerVersion="0.19">
+   <inputLogFileName>sepsis.xes</inputLogFileName>
+   <outputModelFileName>var2\omodel_fodina_sepsis.pnml</outputModelFileName>
+   <runDate>2020-09-04 18:25:25.976 AEST</runDate>
+   <taskRunStats class="java.util.LinkedList">
+      <taskStats taskName="spmlogparser" runState="SUCCESS">
+         <duration>110</duration>
+         <start>1599207925976</start>
+         <errorMessage></errorMessage>
+         <measureStats measure="LOG_TRACE_COUNT">
+            <number class="java.lang.Integer">1050</number>
+         </measureStats>
+         <measureStats measure="LOG_EVENT_COUNT">
+            <number class="java.lang.Integer">15214</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="miner" runState="SUCCESS">
+         <duration>187</duration>
+         <start>1599207926086</start>
+         <errorMessage></errorMessage>
+      </taskStats>
+      <taskStats taskName="visualize" runState="SUCCESS">
+         <duration>0</duration>
+         <start>1599207926288</start>
+         <errorMessage></errorMessage>
+      </taskStats>
+   </taskRunStats>
+   <errorMessage></errorMessage>
+   <runState>SUCCESS</runState>
+</runStats>

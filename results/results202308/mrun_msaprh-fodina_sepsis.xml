@@ -1,0 +1,40 @@
+<runStats miner="Mean Scaled Activity Pair Estimator" machineName="SEF-1953019678">
+        <!-- entropy timeout on hpc marked FAILED -->
+   <inputLogFileName>sepsis.xes</inputLogFileName>
+   <outputModelFileName>var\osmodel_msaprh-fodina_sepsis.xml</outputModelFileName>
+   <runDate>2020-09-01 15:47:54.227 AEST</runDate>
+   <taskRunStats class="java.util.LinkedList">
+      <taskStats taskName="calculate Naive SPN entity count" runState="SUCCESS">
+         <duration>0</duration>
+         <start>1598939274368</start>
+         <measureStats measure="MODEL_ENTITY_COUNT">
+            <number class="java.lang.Integer">64</number>
+         </measureStats>
+         <measureStats measure="NORMALIZED_PETRI_NET_EDGE_SIMPLICITY">
+            <number class="java.lang.Double">0.9946102274221112</number>
+         </measureStats>
+         <measureStats measure="MODEL_EDGE_COUNT">
+            <number class="java.lang.Integer">82</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="calculate Earth Movers Similarity Tuned" runState="SUCCESS">
+         <duration>128</duration>
+         <start>1598934789951</start>
+         <measureStats measure="EARTH_MOVERS_LIGHT_COVERAGE">
+            <number class="java.lang.Double">0.49205782660249564</number>
+         </measureStats>
+      </taskStats>
+
+      <taskStats taskName="spmlogparser" runState="RUNNING">
+         <duration>0</duration>
+         <start>1598939274227</start>
+         <measureStats measure="LOG_EVENT_COUNT">
+            <number class="java.lang.Integer">15214</number>
+         </measureStats>
+         <measureStats measure="LOG_TRACE_COUNT">
+            <number class="java.lang.Integer">1050</number>
+         </measureStats>
+      </taskStats>
+   </taskRunStats>
+   <runState>FAILED</runState>
+</runStats>

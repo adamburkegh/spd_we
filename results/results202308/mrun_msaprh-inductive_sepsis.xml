@@ -1,0 +1,34 @@
+<runStats miner="Mean Scaled Activity Pair Estimator" machineName="SEF-1953019678" runnerVersion="0.17">
+   <inputLogFileName>sepsis.xes</inputLogFileName>
+   <outputModelFileName>var\osmodel_msaprh-inductive_sepsis.pnml</outputModelFileName>
+   <runDate>2020-09-02 22:48:44.546 AEST</runDate>
+   <taskRunStats class="java.util.LinkedList">
+      <taskStats taskName="calculate Naive SPN entity count" runState="SUCCESS">
+         <duration>0</duration>
+         <start>1599050924718</start>
+         <errorMessage></errorMessage>
+         <measureStats measure="MODEL_ENTITY_COUNT">
+            <number class="java.lang.Integer">47</number>
+         </measureStats>
+         <measureStats measure="MODEL_EDGE_COUNT">
+            <number class="java.lang.Integer">62</number>
+         </measureStats>
+         <measureStats measure="NORMALIZED_PETRI_NET_EDGE_SIMPLICITY">
+            <number class="java.lang.Double">0.9959248060996451</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="calculate Entropy Precision and Recall" runState="SUCCESS">
+         <duration>1594</duration>
+         <start>1599050924733</start>
+         <errorMessage></errorMessage>
+         <measureStats measure="ENTROPY_PRECISION">
+            <number class="java.lang.Double">0.1325273549168242</number>
+         </measureStats>
+         <measureStats measure="ENTROPY_RECALL">
+            <number class="java.lang.Double">0.7939168974255368</number>
+         </measureStats>
+      </taskStats>
+   </taskRunStats>
+   <errorMessage></errorMessage>
+   <runState>RUNNING</runState>
+</runStats>

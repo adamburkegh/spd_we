@@ -1,0 +1,24 @@
+<runStats miner="Rogge-Solti StochasticMinerPlugin (Tracing)" machineName="SEF-1953019678">
+   <!-- File manually created by AB after 12 hour timeout
+   during mining. Didn't save log -->
+   <inputLogFileName>sepsis.xes</inputLogFileName>
+   <outputModelFileName>var\omodel_rssmt_sepsis.xml</outputModelFileName>
+   <runDate>2020-08-20 09:31:20.800 AEST</runDate>
+   <taskRunStats class="java.util.LinkedList">
+      <taskStats taskName="spmlogparser" runState="SUCCESS">
+         <duration>31197</duration>
+         <start>1597920306337</start>
+         <measureStats measure="LOG_TRACE_COUNT">
+            <number class="java.lang.Integer">1050</number>
+         </measureStats>
+         <measureStats measure="LOG_EVENT_COUNT">
+            <number class="java.lang.Integer">11788</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="miner" runState="FAILED">
+         <duration>219580</duration>
+         <start>1597920337534</start>
+      </taskStats>
+   </taskRunStats>
+   <runState>FAILED</runState>
+</runStats>

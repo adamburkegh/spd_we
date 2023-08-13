@@ -1,0 +1,22 @@
+<runStats miner="Frequency Estimator" machineName="SEF-1953019678">
+	<!-- Edit: marked failed as Earth Movers timed out after 13 hours -->
+   <inputLogFileName>sepsis.xes</inputLogFileName>
+   <outputModelFileName>var\osmodel_fe-inductive_sepsis.xml</outputModelFileName>
+   <runDate>2020-09-01 19:38:45.679 AEST</runDate>
+   <taskRunStats class="java.util.LinkedList">
+      <taskStats taskName="calculate Naive SPN entity count" runState="SUCCESS">
+         <duration>0</duration>
+         <start>1598953125850</start>
+         <measureStats measure="NORMALIZED_PETRI_NET_EDGE_SIMPLICITY">
+            <number class="java.lang.Double">0.9959248060996451</number>
+         </measureStats>
+         <measureStats measure="MODEL_ENTITY_COUNT">
+            <number class="java.lang.Integer">47</number>
+         </measureStats>
+         <measureStats measure="MODEL_EDGE_COUNT">
+            <number class="java.lang.Integer">62</number>
+         </measureStats>
+      </taskStats>
+   </taskRunStats>
+   <runState>FAILED</runState>
+</runStats>

@@ -1,0 +1,26 @@
+<runStats miner="Inductive Miner" machineName="SEF-1953019678">
+   <inputLogFileName>BPIC2013_closed.xes</inputLogFileName>
+   <outputModelFileName>var\omodel_inductive_BPIC2013_closed.xml</outputModelFileName>
+   <runDate>2020-08-28 11:44:42.357 AEST</runDate>
+   <taskRunStats class="java.util.LinkedList">
+      <taskStats taskName="spmlogparser" runState="SUCCESS">
+         <duration>375</duration>
+         <start>1598579082357</start>
+         <measureStats measure="LOG_TRACE_COUNT">
+            <number class="java.lang.Integer">1487</number>
+         </measureStats>
+         <measureStats measure="LOG_EVENT_COUNT">
+            <number class="java.lang.Integer">6660</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="miner" runState="SUCCESS">
+         <duration>172</duration>
+         <start>1598579082732</start>
+      </taskStats>
+      <taskStats taskName="visualize" runState="SUCCESS">
+         <duration>0</duration>
+         <start>1598579083013</start>
+      </taskStats>
+   </taskRunStats>
+   <runState>SUCCESS</runState>
+</runStats>

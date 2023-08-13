@@ -1,0 +1,48 @@
+<runStats miner="Activity Pair Right-Handed Estimator" machineName="SEF-1953019678">
+   <inputLogFileName>BPIC2018_reference.xes</inputLogFileName>
+   <outputModelFileName>var\osmodel_aprh-inductive_BPIC2018_reference.xml</outputModelFileName>
+   <runDate>2020-08-28 12:02:20.192 AEST</runDate>
+   <taskRunStats class="java.util.LinkedList">
+      <taskStats taskName="calculate Naive SPN entity count" runState="SUCCESS">
+         <duration>0</duration>
+         <start>1598580143457</start>
+         <measureStats measure="MODEL_ENTITY_COUNT">
+            <number class="java.lang.Integer">23</number>
+         </measureStats>
+         <measureStats measure="NORMALIZED_PETRI_NET_EDGE_SIMPLICITY">
+            <number class="java.lang.Double">0.9997821926972323</number>
+         </measureStats>
+         <measureStats measure="MODEL_EDGE_COUNT">
+            <number class="java.lang.Integer">28</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="calculate Earth Movers Similarity Tuned" runState="SUCCESS">
+         <duration>157</duration>
+         <start>1598580143457</start>
+         <measureStats measure="EARTH_MOVERS_LIGHT_COVERAGE">
+            <number class="java.lang.Double">0.9012971413616323</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="calculate Entropy Precision and Recall" runState="SUCCESS">
+         <duration>110</duration>
+         <start>1598580143629</start>
+         <measureStats measure="ENTROPY_RECALL">
+            <number class="java.lang.Double">0.9618188900179881</number>
+         </measureStats>
+         <measureStats measure="ENTROPY_PRECISION">
+            <number class="java.lang.Double">0.4220365116327131</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="spmlogparser" runState="RUNNING">
+         <duration>0</duration>
+         <start>1598580140192</start>
+         <measureStats measure="LOG_EVENT_COUNT">
+            <number class="java.lang.Integer">128554</number>
+         </measureStats>
+         <measureStats measure="LOG_TRACE_COUNT">
+            <number class="java.lang.Integer">43802</number>
+         </measureStats>
+      </taskStats>
+   </taskRunStats>
+   <runState>SUCCESS</runState>
+</runStats>

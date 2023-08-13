@@ -1,0 +1,20 @@
+<runStats miner="Alignment" machineName="SEF-PA00143522" runnerVersion="dev">
+   <inputLogFileName>BPIC2013_incidents.xes</inputLogFileName>
+   <outputModelFileName>var\osmodel_align-fodina_BPIC2013_incidents.pnml</outputModelFileName>
+   <runDate>2023-08-11 17:00:59.708 AEST</runDate>
+   <taskRunStats class="java.util.LinkedList">
+      <taskStats taskName="spmrunner_estimator" runState="FAILED">
+         <duration>744</duration>
+         <start>1691737259708</start>
+         <errorMessage>Initial markings not supplied for alignment calculation and couldn&apos;t guess</errorMessage>
+         <measureStats measure="LOG_EVENT_COUNT">
+            <number class="java.lang.Integer">65533</number>
+         </measureStats>
+         <measureStats measure="LOG_TRACE_COUNT">
+            <number class="java.lang.Integer">7554</number>
+         </measureStats>
+      </taskStats>
+   </taskRunStats>
+   <errorMessage>Initial markings not supplied for alignment calculation and couldn&apos;t guess</errorMessage>
+   <runState>FAILED</runState>
+</runStats>

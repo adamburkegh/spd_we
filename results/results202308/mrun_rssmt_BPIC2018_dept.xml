@@ -1,0 +1,56 @@
+<runStats miner="Rogge-Solti StochasticMinerPlugin (Tracing)" machineName="SEF-1953019678">
+   <inputLogFileName>BPIC2018_dept.xes</inputLogFileName>
+   <outputModelFileName>var\omodel_rssmt_BPIC2018_dept.xml</outputModelFileName>
+   <runDate>2020-08-24 16:11:24.782 AEST</runDate>
+   <taskRunStats class="java.util.LinkedList">
+      <taskStats taskName="spmlogparser" runState="SUCCESS">
+         <duration>2187</duration>
+         <start>1598249484782</start>
+         <measureStats measure="LOG_TRACE_COUNT">
+            <number class="java.lang.Integer">29297</number>
+         </measureStats>
+         <measureStats measure="LOG_EVENT_COUNT">
+            <number class="java.lang.Integer">46669</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="miner" runState="SUCCESS">
+         <duration>12200</duration>
+         <start>1598249486969</start>
+      </taskStats>
+      <taskStats taskName="calculate Naive SPN entity count" runState="SUCCESS">
+         <duration>0</duration>
+         <start>1598249499372</start>
+         <measureStats measure="MODEL_ENTITY_COUNT">
+            <number class="java.lang.Integer">44</number>
+         </measureStats>
+         <measureStats measure="NORMALIZED_PETRI_NET_EDGE_SIMPLICITY">
+            <number class="java.lang.Double">0.9988429149971073</number>
+         </measureStats>
+         <measureStats measure="MODEL_EDGE_COUNT">
+            <number class="java.lang.Integer">54</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="calculate Entropy Precision and Recall" runState="SUCCESS">
+         <duration>94</duration>
+         <start>1598249499637</start>
+         <measureStats measure="ENTROPY_PRECISION">
+            <number class="java.lang.Double">0.8399746459284071</number>
+         </measureStats>
+         <measureStats measure="ENTROPY_RECALL">
+            <number class="java.lang.Double">0.8861140606659746</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="calculate Earth Movers Similarity Tuned" runState="SUCCESS">
+         <duration>157</duration>
+         <start>1598249499731</start>
+         <measureStats measure="EARTH_MOVERS_LIGHT_COVERAGE">
+            <number class="java.lang.Double">0.9562375470942213</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="visualize" runState="SUCCESS">
+         <duration>0</duration>
+         <start>1598249499372</start>
+      </taskStats>
+   </taskRunStats>
+   <runState>SUCCESS</runState>
+</runStats>

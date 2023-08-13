@@ -1,0 +1,49 @@
+<runStats miner="Mean Scaled Activity Pair Estimator" machineName="SEF-1953019678">
+   <inputLogFileName>BPIC2018_dept.xes</inputLogFileName>
+   <outputModelFileName>var\osmodel_msaprh-fodina_BPIC2018_dept.xml</outputModelFileName>
+   <runDate>2020-08-31 22:24:10.345 AEST</runDate>
+   <taskRunStats class="java.util.LinkedList">
+      <taskStats taskName="calculate Naive SPN entity count" runState="SUCCESS">
+         <duration>0</duration>
+         <start>1598876652313</start>
+         <measureStats measure="MODEL_ENTITY_COUNT">
+            <number class="java.lang.Integer">40</number>
+         </measureStats>
+         <measureStats measure="MODEL_EDGE_COUNT">
+            <number class="java.lang.Integer">56</number>
+         </measureStats>
+         <measureStats measure="NORMALIZED_PETRI_NET_EDGE_SIMPLICITY">
+            <number class="java.lang.Double">0.9988000599970002</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="calculate Entropy Precision and Recall" runState="SUCCESS">
+         <duration>47</duration>
+         <start>1598876652313</start>
+         <measureStats measure="ENTROPY_PRECISION">
+            <number class="java.lang.Double">1.0</number>
+         </measureStats>
+         <measureStats measure="ENTROPY_RECALL">
+            <number class="java.lang.Double">2.2517064021059356E-8</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="spmlogparser" runState="RUNNING">
+         <duration>0</duration>
+         <start>1598876650345</start>
+         <measureStats measure="LOG_EVENT_COUNT">
+            <number class="java.lang.Integer">46669</number>
+         </measureStats>
+         <measureStats measure="LOG_TRACE_COUNT">
+            <number class="java.lang.Integer">29297</number>
+         </measureStats>
+      </taskStats>
+      <taskStats taskName="calculate Earth Movers Similarity Tuned" runState="SUCCESS">
+         <duration>66</duration>
+         <start>1598923764420</start>
+         <measureStats measure="EARTH_MOVERS_LIGHT_COVERAGE">
+            <number class="java.lang.Double">0.8706875100470235</number>
+         </measureStats>
+      </taskStats>
+
+   </taskRunStats>
+   <runState>SUCCESS</runState>
+</runStats>

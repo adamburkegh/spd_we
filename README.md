@@ -2,7 +2,7 @@
 
 This project shows a technique for discovering Stochastic Petri Nets from event logs using process mining. It combines a number of established process mining discovery algorithms with weight estimators which capture a stochastic perspective. It also includes scaffolding code for experimental evaluation, and result files from our evaluation.
 
-The estimation framework and evaluation is described in "Burke, A, Leemans, S.J.J and Wynn, M. T. (2021) - Stochastic Process Discovery By Weight Estimation" (presented at the PQMI2020 workshop) DOI 10.1007/978-3-030-72693-5_20.
+The estimation framework and evaluation is described in "Burke, A, Leemans, S.J.J and Wynn, M. T. (2021) - Stochastic Process Discovery By Weight Estimation" (presented at the PQMI2020 workshop) DOI 10.1007/978-3-030-72693-5_20. You can also see this  [short blog post](https://adamburkeware.net/2020/10/06/spd-by-weight-estimation.html).
 
 # ProM Users
 
@@ -26,7 +26,7 @@ Once installed, the plugins are
 
 The test scaffold entry point is `ModelRunner.java`.
 
-`PPTEstimateRunner.java` is a simple tool for applying estimated weights to process tree models, so long as the original discovery algorithm output a process tree.
+`PPTEstimateRunner.java` is a simple tool for applying estimated weights to process tree models, so long as the original discovery algorithm outputs a process tree.
 
 The reporting entry point is `SPNDiscoverReporter.java`.
 

@@ -19,6 +19,15 @@
 		<!-- Set the os to win32, win64, lin32, lin64, mac, or all -->
 		<property name="os" value="all" />
 		
+	    <!-- Easier to just use the standard ivy cache across Eclipse and ivy 
+             command line, especially given the slow state of the prom repo. 
+             May need to clear this directory if refreshing dependencies, as
+             it behaves like a secondary ivy cache. 
+
+             This is not great, tbh. However the makezip task depends on this 
+             for now. Unless you have specific ivy use case, like a ProM 
+             plugin, suggest using a gradle build process instead. See 
+             spm_dim or prob-process-tree on github for an example.  -->
 		<property name="ivy.lib.dir" value="ivy" />
 
 		<property name="author" value="Adam Burke" />

@@ -66,7 +66,7 @@
 			<sequential>
 				<!-- Compile the java code from ${src}-@{module} into ${build} -->
 				<javac srcdir="${src}" classpathref="classpath"  
-					destdir="${build}" nowarn="false" verbose="yes" 
+					destdir="${build}" nowarn="false" verbose="no" 
 					debug="false" debuglevel="lines,vars,source" deprecation="yes" 
 					source="${java.source.version}" target="${java.target.version}">
 					<!-- Check for unsafe operations -->
@@ -74,7 +74,7 @@
 				</javac>
 				<!-- Tests -->
                 <javac srcdir="${src.tests}" classpathref="classpath"  
-                    destdir="${build}" nowarn="false" verbose="yes" 
+                    destdir="${build}" nowarn="false" verbose="no" 
                     debug="false" debuglevel="lines,vars,source" deprecation="yes" 
                     source="${java.source.version}" target="${java.target.version}">
                     <!-- Check for unsafe operations -->

@@ -16,22 +16,32 @@
             <artifact pattern="https://github.com/promworkbench/Releases/raw/main/Libraries/[module]/[revision]/[artifact]-[revision].[ext]" />
             <artifact pattern="https://github.com/promworkbench/Releases/raw/main/Libraries/[module]/[revision]/[artifact]_[revision].[ext]" />
         </url>
-        <filesystem name="local">
+        <url name="fodina">
+            <artifact pattern="https://www.processmining.be/fodina/downloads/[artifact]-[revision].[ext]" />
+        </url>
+        <url name="ppt">
+            <artifact pattern="https://github.com/adamburkegh/prob-process-tree/releases/download/v[revision]/[artifact]-[revision].[ext]"/>
+        </url>
+		<!-- can be used when keeping copies locally for redeployment -->
+		<!-- filesystem name="local">
             <artifact pattern="${ivy.settings.dir}/ldlib/fodina-2019-06-17/[artifact]-[revision].[ext]"/>
             <artifact pattern="${ivy.settings.dir}/ldlib/splitminer/[artifact]-[revision].[ext]"/>
             <artifact pattern="${ivy.settings.dir}/ldlib/splitminer/lib/[artifact]-[revision].[ext]"/>
-        </filesystem>
-        <filesystem name="local-maven2" m2compatible="true" >
+		</filesystem -->
+		<!-- Can be used when using maven for other projects -->
+        <!-- filesystem name="local-maven2" m2compatible="true" >
             <artifact pattern="${m2-pattern}"/>
             <ivy pattern="${m2-pattern}"/>
-        </filesystem>
+        </filesystem -->
         <ibiblio name="maven2" m2compatible="true" root="https://repo1.maven.org/maven2/"/>
         <chain name="default" returnFirst="true">  
             <resolver ref="prom" />  
             <resolver ref="prom-svn" />  
             <resolver ref="prom-libs" />  
-            <resolver ref="local-maven2" />
+            <!-- resolver ref="local-maven2" / -->
             <resolver ref="maven2" />  
+			<resolver ref="fodina" />
+			<resolver ref="ppt" />
         </chain>  
     </resolvers>
 </ivysettings>

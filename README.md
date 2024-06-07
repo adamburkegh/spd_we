@@ -49,7 +49,9 @@ Requirements:
  + R (for the R scripts used in reporting only)
 
 To build:
+
 `ant resolve`
+
 `ant test`
 
 To build a zip for distributing, eg to run from the Windows command line or on Unix:

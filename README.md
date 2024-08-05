@@ -83,6 +83,9 @@ Once installed, the plugins are
 + Mine Stochastic Petri net from log with estimator
     + Uses a default miner and estimator to produce a GSPN directly from an event log.
 
+## Plugin Source
+
+The ProM plugin source is a subset of this repository, synched through a copying process in the ant build file. This reduces the surface of dependencies to manage in ProM. The source project used by ProM to build is the [StochasticWeightEstimation plugin](https://github.com/promworkbench/StochasticWeightEstimation) under the promworkbench project.
 
 # Results
 

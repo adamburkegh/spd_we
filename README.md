@@ -4,7 +4,7 @@ This project shows a technique for discovering Stochastic Petri Nets from event 
 
 The estimation framework and evaluation is described in "Burke, A, Leemans, S.J.J and Wynn, M. T. (2021) - Stochastic Process Discovery By Weight Estimation", DOI 10.1007/978-3-030-72693-5_20. You can also see this  [short blog post](https://adamburkeware.net/2020/10/06/spd-by-weight-estimation.html).
 
-
+This page details the Java / ProM implementation. Alternative implementations are listed at the end.
 
 # Developer and Command Line Use
 
@@ -91,3 +91,7 @@ The ProM plugin source is a subset of this repository, synched through a copying
 
 Result files from experiments performed on this framework are in `results`.
 
+
+# Alternative Implementations
+
+Two of these estimation techniques - alignment and frequency estimation - are implemented in [Ebi](https://bpm.rwth-aachen.de/ebi/) as of version 0.1.0 (25 October 2024). Ebi has binary releases and is an open-source project implemented in Rust.

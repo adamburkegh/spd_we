@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Collection;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import au.edu.qut.pm.util.LogManager;
+import au.edu.qut.pm.util.Logger;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

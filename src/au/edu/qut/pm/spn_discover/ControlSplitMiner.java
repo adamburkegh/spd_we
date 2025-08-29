@@ -3,8 +3,8 @@ package au.edu.qut.pm.spn_discover;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import au.edu.qut.pm.util.LogManager;
+import au.edu.qut.pm.util.Logger;
 import org.deckfour.xes.model.XLog;
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet;

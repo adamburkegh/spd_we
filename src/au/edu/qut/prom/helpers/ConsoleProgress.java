@@ -1,7 +1,7 @@
 package au.edu.qut.prom.helpers;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import au.edu.qut.pm.util.LogManager;
+import au.edu.qut.pm.util.Logger;
 import org.processmining.framework.plugin.Progress;
 
 public class ConsoleProgress implements Progress {

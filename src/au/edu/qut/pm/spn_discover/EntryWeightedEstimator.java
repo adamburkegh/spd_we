@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import au.edu.qut.pm.util.LogManager;
+import au.edu.qut.pm.util.Logger;
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet.DistributionType;
 import org.processmining.models.graphbased.directed.petrinet.elements.Place;

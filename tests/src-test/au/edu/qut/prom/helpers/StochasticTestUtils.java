@@ -6,12 +6,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.LoggerContext;
-import org.apache.logging.log4j.core.config.Configuration;
-import org.apache.logging.log4j.core.config.LoggerConfig;
 import org.deckfour.xes.classification.XEventNameClassifier;
 import org.deckfour.xes.model.XLog;
 import org.processmining.acceptingpetrinet.models.AcceptingPetriNet;
@@ -25,6 +19,7 @@ import org.processmining.models.graphbased.directed.petrinet.elements.Transition
 
 import au.edu.qut.pm.spn_estimator.LogSourcedWeightEstimator;
 import au.edu.qut.pm.stochastic.StochasticNetCloner;
+import au.edu.qut.pm.util.Logger;
 import au.edu.qut.xes.helpers.DelimitedTraceToXESConverter;
 
 public class StochasticTestUtils {
@@ -34,13 +29,7 @@ public class StochasticTestUtils {
 	
 
 	public static void initializeLogging() {
-		// ugh TODO log4j 2 warns against the volatility of this API
-		// but we're not using maven and we don't have a reliable path
-		LoggerContext context = (LoggerContext) LogManager.getContext(false);
-		Configuration config = context.getConfiguration();
-		LoggerConfig rootConfig = config.getLoggerConfig(LogManager.ROOT_LOGGER_NAME);
-		rootConfig.setLevel(Level.DEBUG);
-		context.updateLoggers();
+		// No-op as no longer using log4j
 	}
 
 	public static void renamePlacesByTransition(StochasticNet expected) {

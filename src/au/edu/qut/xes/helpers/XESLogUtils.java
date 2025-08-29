@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import au.edu.qut.pm.util.LogManager;
+import au.edu.qut.pm.util.Logger;
 import org.deckfour.xes.classification.XEventClassifier;
 import org.deckfour.xes.classification.XEventNameClassifier;
 import org.deckfour.xes.model.XLog;

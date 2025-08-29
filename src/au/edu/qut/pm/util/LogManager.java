@@ -14,7 +14,7 @@ package au.edu.qut.pm.util;
 public class LogManager {
 
 	// Yes, singletons are discouraged; no, here it doesn't matter.
-	private static Logger INSTANCE = new Logger(Logger.LogLevel.INFO);
+	private static Logger INSTANCE = new Logger(Logger.Level.INFO);
 	
 	public static Logger getLogger() {
 		return INSTANCE;

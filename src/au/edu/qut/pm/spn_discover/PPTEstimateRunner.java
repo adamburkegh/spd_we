@@ -1,7 +1,7 @@
 package au.edu.qut.pm.spn_discover;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import au.edu.qut.pm.util.LogManager;
+import au.edu.qut.pm.util.Logger;
 import org.processmining.acceptingpetrinet.models.AcceptingPetriNet;
 import org.processmining.acceptingpetrinet.models.impl.AcceptingPetriNetImpl;
 

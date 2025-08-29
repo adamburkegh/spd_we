@@ -1,7 +1,7 @@
 package au.edu.qut.pm.spn_conformance;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import au.edu.qut.pm.util.LogManager;
+import au.edu.qut.pm.util.Logger;
 import org.deckfour.xes.classification.XEventClassifier;
 import org.deckfour.xes.model.XLog;
 import org.processmining.framework.plugin.PluginContext;

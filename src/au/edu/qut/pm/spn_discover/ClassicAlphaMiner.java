@@ -2,8 +2,8 @@ package au.edu.qut.pm.spn_discover;
 
 import java.io.File;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import au.edu.qut.pm.util.LogManager;
+import au.edu.qut.pm.util.Logger;
 import org.deckfour.xes.classification.XEventClass;
 import org.deckfour.xes.classification.XEventClassifier;
 import org.deckfour.xes.model.XLog;

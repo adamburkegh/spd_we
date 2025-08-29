@@ -132,6 +132,15 @@ public class Logger {
 	public void error(String string, Object o1, Object o2) {
 		log(Level.ERROR,string, new Object[] {o1,o2});
 	}
-	
+
+	public void error(String string, Object o1, Exception e) {
+		log(Level.ERROR,string, new Object[] {o1});
+		logException(e);
+	}
+
+	private void logException(Exception e) {
+		stream.println(e);
+	}
+
 
 }

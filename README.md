@@ -6,6 +6,12 @@ The estimation framework and evaluation is described in "Burke, A, Leemans, S.J.
 
 This page details the Java / ProM implementation. Alternative implementations are listed at the end.
 
+ * [Developer and Command Line Use](dev)
+ * [ProM Users](prom)
+ * [Results](results)
+ * [Alternative Implementations](alt)
+
+<a id="dev"></a>
 # Developer and Command Line Use
 
 ## Running From Command Line
@@ -58,40 +64,35 @@ To build a zip for distributing, eg to run from the Windows command line or on U
 `ant makezip`
 
 
-
+<a id="prom"></a>
 # ProM Users
 
-## Installation
-
-**Unfortunately**, due to limitations in the latest versions of ProM connected to classloaders and later Java versions, it appears distributing plugins via simple jar file downloads may no longer be possible. This is based on testing with ProM 6.10 and 6.11 in December 2023 and January 2024, using both this estimator plugin and the Fodina plugin. Any communication on fixes for this are welcome. A new drop-in jar and the instructions from the last working ProM version are left below to help those developing a workaround.
-
-The jar file `spndiscover-x.y.z.jar` is provided with most releases. This can be downloaded and placed in a plugin folder on the ProM classpath. 
-
-To add an unregistered ProM plugin:
-1. Create a new subfolder in your ProM installation directory called `plugins`. It must be a separate directory to the existing `lib` directory.
-2. Add all required jars for your plugin to the `plugins` directory. Do not include ProM libraries or plugins provided with the ProM distribution.
-3. Edit the file `ProMxyz.bat` to include `plugins` in the classpath.
-4. Run ProM.
-
-This essentially the same installation process to [Fodina](http://www.processmining.be/fodina/). 
+Plugins are available in the ProM nightly build. Unfortunately a build pipeline issue meant these plugins were broken in ProM 6.14, but at time of writing they run in the [nightly build](https://promtools.org/prom-6-nightly-builds/).
 
 ## Running Plugins
 
-Once installed, the plugins are 
+The plugins can be run from the ProM GUI, as:
 + Mine Stochastic Petri net with estimators
     + User can selects an estimator and classifier through the GUI.
 + Mine Stochastic Petri net from log with estimator
     + Uses a default miner and estimator to produce a GSPN directly from an event log.
 
+
+## Installation Of Alternative Discovery Algorithms in ProM
+
+The estimator plugins require an event log and a Petri net as input. In earlier versions of ProM, it was possible to integrate plugins such as Fodina not available in ProM releases. According to our testing, this has not been possible since ProM 6.10. As before, it is still possible to load a Petri net as a PNML file after creating it outside ProM.
+
+
 ## Plugin Source
 
 The ProM plugin source is a subset of this repository, synched through a copying process in the ant build file. This reduces the surface of dependencies to manage in ProM. The source project used by ProM to build is the [StochasticWeightEstimation plugin](https://github.com/promworkbench/StochasticWeightEstimation) under the promworkbench project.
 
+<a id="results"></a>
 # Results
 
 Result files from experiments performed on this framework are in `results`.
 
-
+<a id="alt"></a>
 # Alternative Implementations
 
 Two of these estimation techniques - alignment and frequency estimation - are implemented in [Ebi](https://bpm.rwth-aachen.de/ebi/) as of version 0.1.0 (25 October 2024). Ebi has binary releases and is an open-source project implemented in Rust.

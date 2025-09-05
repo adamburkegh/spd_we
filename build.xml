@@ -12,7 +12,7 @@
         <property name="scripts" location="scripts" />
 	    <property name="reports.tests" location="reports" />
 		<property name="release" location="latestrelease" />
-	    <property name="major_minor" value="1.1.1" />
+	    <property name="major_minor" value="1.2.0" />
 		<property name="version" value="${major_minor}" />
 		<property name="project" value="spndiscover" />
 
